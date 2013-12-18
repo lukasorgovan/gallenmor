@@ -1,0 +1,660 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ticketIn",
+				"ticketInspectorScroll"
+			],
+			[
+				"last",
+				"lastSelectedAction"
+			],
+			[
+				"Sys",
+				"SystemObject"
+			],
+			[
+				"sele",
+				"selectedTickets"
+			],
+			[
+				"list-style",
+				"list-style-type"
+			],
+			[
+				"out",
+				"outOfService"
+			],
+			[
+				"controledE",
+				"controledExit"
+			],
+			[
+				"all",
+				"allGates"
+			],
+			[
+				"contr",
+				"controledEntryExit"
+			],
+			[
+				"controled",
+				"controledEntryExit"
+			],
+			[
+				"selecte",
+				"selectedGates"
+			],
+			[
+				"pro",
+				"property"
+			],
+			[
+				"modal",
+				"modalText"
+			],
+			[
+				"confi",
+				"ConfirmationView"
+			],
+			[
+				"gate",
+				"gateControllFrame"
+			],
+			[
+				"contro",
+				"controllFrame"
+			],
+			[
+				"con",
+				"confirmAction"
+			],
+			[
+				"ini",
+				"initializedAction"
+			],
+			[
+				"App",
+				"Application"
+			],
+			[
+				"field",
+				"fieldName"
+			],
+			[
+				"fiel",
+				"fieldName"
+			],
+			[
+				"requ",
+				"requestURI"
+			],
+			[
+				"f",
+				"font-size"
+			],
+			[
+				"list",
+				"list-style-type"
+			],
+			[
+				"script",
+				"scriptPath"
+			],
+			[
+				"eas",
+				"ease-in-out"
+			],
+			[
+				"cla",
+				"className"
+			],
+			[
+				"value",
+				"valueElement"
+			],
+			[
+				"data",
+				"dataArray"
+			],
+			[
+				"split",
+				"splitLabels"
+			],
+			[
+				"gete",
+				"getElementById"
+			],
+			[
+				"max",
+				"max-height"
+			],
+			[
+				"conten",
+				"content_forum"
+			],
+			[
+				"no",
+				"no-repeat"
+			],
+			[
+				"i",
+				"italic"
+			],
+			[
+				"fon",
+				"font-style"
+			],
+			[
+				"initial",
+				"initialMusic"
+			],
+			[
+				"m",
+				"messages"
+			],
+			[
+				"thum",
+				"thumbnails"
+			],
+			[
+				"get",
+				"get_seasons"
+			],
+			[
+				"time",
+				"timeScope"
+			],
+			[
+				"count",
+				"countdownEndCallback"
+			],
+			[
+				"co",
+				"countdown"
+			],
+			[
+				"html",
+				"htmlTag"
+			],
+			[
+				"font-",
+				"font-family"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 49.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"mardo",
+				"Markdown Preview: Github Flavored Markdown: Preview in Browser"
+			],
+			[
+				"markdow",
+				"Markdown Preview: Github Flavored Markdown: Preview in Browser"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"mard",
+				"Markdown Preview: Github Flavored Markdown: Preview in Browser"
+			],
+			[
+				"markd",
+				"Markdown Preview: Github Flavored Markdown: Preview in Browser"
+			],
+			[
+				"markdo",
+				"Markdown Preview: Github Flavored Markdown: Preview in Browser"
+			],
+			[
+				"open",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"prefere",
+				"Preferences: Settings - User"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"mark",
+				"Markdown Preview: Github Flavored Markdown: Preview in Browser"
+			],
+			[
+				"markdown",
+				"Markdown Preview: Github Flavored Markdown: Preview in Browser"
+			],
+			[
+				"packag",
+				"Package Control: Remove Package"
+			],
+			[
+				"packa",
+				"Preferences: Browse Packages"
+			],
+			[
+				"jshi clear",
+				"JSHint: Clear Annotations"
+			],
+			[
+				"jshint",
+				"JSHint: Clear Annotations"
+			],
+			[
+				"jshi",
+				"JSHint"
+			],
+			[
+				"jshin",
+				"JSHint"
+			],
+			[
+				"jsh",
+				"JSHint"
+			],
+			[
+				"js",
+				"JSHint"
+			],
+			[
+				"remove ",
+				"Package Control: Remove Package"
+			],
+			[
+				"projec",
+				"Project: Add Folder"
+			],
+			[
+				"project",
+				"Project: Add Folder"
+			],
+			[
+				"brow",
+				"Preferences: Browse Packages"
+			],
+			[
+				"console",
+				"Set Syntax: R Console"
+			],
+			[
+				"pack",
+				"Preferences: Browse Packages"
+			],
+			[
+				"proje",
+				"Project: Add Folder"
+			],
+			[
+				"use",
+				"Preferences: Settings - User"
+			]
+		],
+		"width": 595.0
+	},
+	"console":
+	{
+		"height": 127.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/lukasorgovan/Desktop/readme.md",
+		"/Users/lukasorgovan/Desktop/vgac-internal/js/app.js",
+		"/Applications/MAMP/htdocs/VGAC/js/app-controllers.js",
+		"/Users/lukasorgovan/Library/Application Support/Sublime Text 2/Packages/JSHint Gutter/JSHint.sublime-settings",
+		"/Users/lukasorgovan/Library/Application Support/Sublime Text 2/Packages/JSHint Gutter/Default (OSX).sublime-keymap",
+		"/Users/lukasorgovan/Library/Application Support/Sublime Text 2/Packages/JSHint Gutter/.jshintrc",
+		"/Users/lukasorgovan/Desktop/daco.js",
+		"/Users/lukasorgovan/Library/Caches/Cleanup At Startup/Transmit/3571BEEB-EC2C-4CA0-A77D-1DC5B57BC253/tajny-santa.php",
+		"/Applications/MAMP/htdocs/VGAC/css/style.css",
+		"/Applications/MAMP/htdocs/VGAC/documentation.md",
+		"/Applications/MAMP/htdocs/VGAC/index.html",
+		"/Applications/MAMP/htdocs/VGAC/js/app-views.js",
+		"/Applications/MAMP/htdocs/VGAC/js/fixtures.js",
+		"/Applications/MAMP/htdocs/VGAC/js/app.js",
+		"/Users/lukasorgovan/Desktop/emberjs/js/models/todo.js",
+		"/Users/lukasorgovan/Desktop/emberjs/js/app.js",
+		"/Users/lukasorgovan/Desktop/emberjs/index.html",
+		"/Users/lukasorgovan/Desktop/emberjs/js/controllers/todos_controller.js",
+		"/Users/lukasorgovan/Desktop/emberjs/style.css",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/views/pages/register.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/controllers/register.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/views/pages/registerSimple.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/assets/css/generator.css",
+		"/Users/lukasorgovan/gallenmor/sub/devel/assets/css/main.css",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/views/pages/generator.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/errors/error_404.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/views/header.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/index.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/errors/error_general.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/errors/error_php.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/config/routes.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/controllers/show404.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/controllers/gallenmor.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/views/footer.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/views/gallenmore.html",
+		"/Users/lukasorgovan/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/lukasorgovan/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/config/database.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/assets/js/generator.js",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/helpers/messages_helper.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/models/api_model.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/views/pages/home.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/controllers/api.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/system/.htaccess",
+		"/Users/lukasorgovan/gallenmor/sub/devel/.htaccess",
+		"/Users/lukasorgovan/gallenmor/sub/devel/assets/text.txt",
+		"/Users/lukasorgovan/gallenmor/sub/devel/assets/jquery.2.0.3.min.js",
+		"/Users/lukasorgovan/Library/Caches/Cleanup At Startup/Transmit/95072B52-A3CC-4686-BE42-5CEF46936F4A/index.html",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/config/config.php",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/config/autoload.php",
+		"/Users/lukasorgovan/gallenmor/web/rasy.js",
+		"/Users/lukasorgovan/gallenmor/web/gallenmor.css",
+		"/Users/lukasorgovan/gallenmor/web/index.html",
+		"/Applications/MAMP/htdocs/drupal/modules/update/update.settings.inc",
+		"/Users/lukasorgovan/Desktop/graph.html",
+		"/Users/lukasorgovan/Desktop/graph/index.html",
+		"/Users/lukasorgovan/gallenmor/sub/devel/application/views/home.php",
+		"/Users/lukasorgovan/gallenmor/sub/dev/app/config/database.php",
+		"/Users/lukasorgovan/gallenmor/sub/dev/app/routes.php",
+		"/Users/lukasorgovan/gallenmor/sub/dev/app/database/migrations/2013_10_10_195909_create_games.php",
+		"/Users/lukasorgovan/gallenmor/sub/dev/app/models/Game.php",
+		"/Users/lukasorgovan/gallenmor/sub/dev/app/controllers/GamesController.php",
+		"/Users/lukasorgovan/gallenmor/sub/dev/app/database/migrations/2013_09_10_212345_create_games.php",
+		"/Users/lukasorgovan/Desktop/web/cesty.js",
+		"/Users/lukasorgovan/Desktop/web/paths.js",
+		"/Users/lukasorgovan/Desktop/web/map.html",
+		"/Users/lukasorgovan/Desktop/mapa/paths.svg",
+		"/Users/lukasorgovan/Desktop/mapa/cesty.js",
+		"/Users/lukasorgovan/Library/Caches/Cleanup At Startup/Transmit/EE301FC5-982E-406F-963B-94D3453BECE8/gallenmor.css",
+		"/Users/lukasorgovan/Library/Caches/Cleanup At Startup/Transmit/3CEDAB20-C5FA-4335-A850-969A94C019F7/index.html",
+		"/Users/lukasorgovan/Library/Caches/Cleanup At Startup/Transmit/AECE5751-1202-4A13-B2A3-FF9F379B8F0A/index.html",
+		"/Users/lukasorgovan/Library/Caches/Cleanup At Startup/Transmit/84F08C6D-BF82-4F15-91DC-BA30AD909725/index.html",
+		"/Library/WebServer/Documents/info.php",
+		"/Users/lukasorgovan/Desktop/gallenmor/gallenmore.html",
+		"/Users/lukasorgovan/Documents/Newgit/nessaci/ness-test/js/countdown-plugin.js",
+		"/Users/lukasorgovan/Downloads/galleria/myplugin.html",
+		"/Users/lukasorgovan/Downloads/galleria/myplugin.js",
+		"/Users/lukasorgovan/Downloads/galleria/galleria-1.2.9.js",
+		"/Users/lukasorgovan/Downloads/galleria/themes/classic/galleria.bein.js",
+		"/Applications/MAMP/htdocs/mongo-tests/tailable-cursors.php",
+		"/Applications/MAMP/htdocs/mongo-tests/index.php",
+		"/Applications/MAMP/htdocs/mongo-tests/ajax.php",
+		"/Users/lukasorgovan/Downloads/galleria/themes/classic/classic-demo.html",
+		"/Users/lukasorgovan/Downloads/galleria/themes/classic/galleria.bein.css",
+		"/Users/lukasorgovan/Desktop/experiments/test-file.php",
+		"/Users/lukasorgovan/Library/Application Support/Sublime Text 2/Packages/Theme - Aqua/ProKit.sublime-theme",
+		"/Users/lukasorgovan/Documents/ness-test/special.xsl",
+		"/Users/lukasorgovan/Documents/ness-test/results.html",
+		"/Users/lukasorgovan/Desktop/jcarousel-master/carousel.html",
+		"/Users/lukasorgovan/Documents/wfa-databaza.sql",
+		"/Users/lukasorgovan/Documents/ness-test/js/results.js",
+		"/Users/lukasorgovan/Desktop/#######ViewController.h",
+		"/Applications/MAMP/htdocs/ness-test/js/countdown-plugin.js",
+		"/Applications/MAMP/htdocs/ness-test/countdown-snippet.html",
+		"/Applications/MAMP/htdocs/michal-countdown/countdown.js",
+		"/Applications/MAMP/htdocs/ness-test/js/countdown.js",
+		"/Users/lukasorgovan/Desktop/gallenmore.html",
+		"/Users/lukasorgovan/Desktop/gallenmor.css",
+		"/Users/lukasorgovan/Desktop/game.js"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"ticketInspectorScroll",
+			"showTicketInspector",
+			"cardReader",
+			"App.CardReader",
+			"modalWi",
+			"modalWin",
+			"showTicketInspector",
+			"cardReader",
+			"Simu",
+			"buttonClick",
+			"modalText",
+			"setStatus",
+			"hide",
+			"ticket",
+			"ticketUsa",
+			"ControllFrame",
+			"ControllerFrame",
+			"controllerFrame",
+			"controllFra",
+			"ticketUsa",
+			"FrameInnerContent",
+			"arrow",
+			"InnerContent",
+			"selectionFrameScroller",
+			"selectionFrameInnerContent",
+			"scroller",
+			"Scroller",
+			"arrowTop",
+			"ticketUsa",
+			"class=\"scr",
+			"scroll",
+			"scroller",
+			"arrow",
+			"ticketUsa",
+			"scroll",
+			"arrow",
+			"scroll",
+			"Application",
+			"application",
+			"Generic",
+			"clock",
+			"tickets",
+			"message",
+			"init",
+			"Index",
+			"ControllFrame",
+			"tickets",
+			"ArraysIndex",
+			"scroll",
+			".gate",
+			".content",
+			"disconnected",
+			"background-posi",
+			"modes",
+			"mode",
+			"button",
+			"informationFrame",
+			"Frame",
+			"return false",
+			"TODO",
+			"dataObjects",
+			"ControllFrame",
+			"messages",
+			"isDefault",
+			"filterBy",
+			"ControllFrame",
+			"updateInformationFrameArrows",
+			"update",
+			"4",
+			"Arrays",
+			"updateSelectionFrameArrows",
+			"HEAD",
+			"updateSelectionFrameArrows",
+			"-  ",
+			"- ",
+			"HEAD",
+			"filterBy",
+			"findBy",
+			"selectG",
+			"select",
+			"selected:",
+			"select",
+			"checkbo",
+			"Tickets",
+			"Ticket",
+			"ControllF",
+			"Control",
+			"Peak",
+			"Tick",
+			"Set",
+			"ticketUsa",
+			"ticketUsage",
+			"ticketUsa",
+			"TODO",
+			"console.log",
+			"Informa",
+			"outOf",
+			"Back",
+			"controllFrame",
+			"backlink",
+			"gateControllFrame",
+			"Back",
+			"Peak Opera",
+			"exit",
+			"gates",
+			"ControllFrameCon",
+			"array",
+			"ArraysI",
+			"Arrays",
+			"Array",
+			"Gates",
+			"Information",
+			"information",
+			"Information",
+			"slipy",
+			"Gates",
+			"Information",
+			"model",
+			"modelFor",
+			"ControllF",
+			"controllF",
+			"find",
+			"swit",
+			"controledE",
+			"div",
+			"View",
+			"arrays",
+			"forEa"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"div",
+			"54, 43, 30",
+			"id"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 36.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 179.0
+	},
+	"replace":
+	{
+		"height": 68.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 187.0,
+	"status_bar_visible": true
+}
