@@ -1,12 +1,20 @@
+// Initial settings
 var overlay = $('.overlay'),
 valid = false;
 
+// Set the height of overlay properly to screen size
 if (overlay.length !== 0) {
 	overlay.css({
 		height: $(document).height() + 'px',
 		backgroundColor: 'rgba(0,0,0,0.73)'
 	});
 }
+
+/**
+ * Bind steps buttons, do sanity field check on client side
+ * @param  {object} event recorded event
+ * @return {void}
+ */
 $("a[class*='step']").on('click', function(event) {
 	
 	event.preventDefault();
@@ -27,10 +35,19 @@ $("a[class*='step']").on('click', function(event) {
 	
 });
 
+// Do sanity field check on focus IN/OUT
 $("input").on('focusin focusout', function (event) {
 	checkField($(this).attr('name'), this.value, event, $(this));
 });
 
+/**
+ * Checks the current field based on regexp and other conditions
+ * @param  {string} fieldName  name of the checked field
+ * @param  {string} fieldValue current value in input
+ * @param  {object} event      declared for use with css add/remove class
+ * @param  {object} $element   current element itself
+ * @return {bool}
+ */
 function checkField(fieldName, fieldValue, event, $element) {
 	switch (fieldName) {
 		case 'username':
@@ -63,6 +80,13 @@ function checkField(fieldName, fieldValue, event, $element) {
 	}
 }
 
+/**
+ * Checks availibility of the field
+ * @param  {string} requestURI API url to handle the ajax
+ * @param  {JSON} dataObject key-value object
+ * @param  {string} fieldName
+ * @return {bool}
+ */
 function checkAvailibility(requestURI, dataObject, fieldName) {
 	var request = $.ajax({
 		type: "POST",
@@ -74,6 +98,12 @@ function checkAvailibility(requestURI, dataObject, fieldName) {
 	});
 }
 
+/**
+ * Display error input
+ * @param  {string} fieldName current field name
+ * @param  {mixed}  result    true OR string error message
+ * @return {bool}
+ */
 function checkResult(fieldName, result) {
 	if (result !== true) {
 			$("input[name='"+fieldName+"']").addClass('shake error');
