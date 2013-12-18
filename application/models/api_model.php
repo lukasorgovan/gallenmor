@@ -1,0 +1,36 @@
+<?php
+Class Api_model extends CI_Model {
+	
+	function generator_get($race, $limit) {
+		$sql = "SELECT nickname, race FROM name_generator WHERE race = ? LIMIT ?";
+		$query = $this->db->query($sql, array($race, $limit));
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		}
+		else {
+			return false;
+		}
+	}
+	function generator_post($race, $name) {
+		$ci =& get_instance();
+		$ci->load->helper('messages_helper');
+		$messages = system_messages();
+		
+		$sql = "INSERT INTO name_generator (nickname, race) VALUES (?, ?)";
+		$query = $this->db->query($sql, array($name, $race));
+		if ($this->db->affected_rows() === 1) {
+			return $messages['name_added'];
+		}
+		else {
+			return $messages['error_generate_name'];
+		}
+	}
+	function checkUserNameAvailibility($name) {
+		$sql = "SELECT COUNT(*) AS pocet FROM users WHERE username = ?";
+		$query = $this->db->query($sql, array($name));
+		foreach ($query->result() as $row) {
+			return $row->pocet;
+		}
+	}
+}
+?>

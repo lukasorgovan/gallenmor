@@ -1,0 +1,45 @@
+#content {
+	position: relative;
+	margin-top: 250px;
+	width: 800px;
+	text-align: center;
+}
+.overlay {
+	width: 100%;
+	background-color: rgba(0,0,0,0.0);
+	position: absolute;
+	top: 0;
+	-webkit-transition: background-color 2s;
+	-moz-transition: background-color 2s;
+	-o-transition: background-color 2s;
+	-ms-transition: background-color 2s;
+	transition: background-color 2s;
+}
+.intro {
+	-webkit-box-shadow: 0px 0px 20px rgba(47,44,37,1),0px 0px 73px rgba(47,44,37,1);
+	box-shadow: 0px 0px 20px rgba(47,44,37,1),0px 0px 73px rgba(47,44,37,1);
+	padding: 15px;
+	border-radius: 5px;
+}
+h1 {
+	text-transform: uppercase;
+}
+input {
+	margin: 15px auto;
+}
+.step-2, .step-3, .step-4, .step-5 {
+	display: none;
+}
+.success {
+	border: 2px solid rgb(59, 99, 86);
+	background-color: rgba(59, 99, 86, 0.5);
+}
+div.error {
+	display: none;
+	background-color: rgba(0, 0, 0, 0.2);
+	padding: 10px;
+	font-family: Arial;
+	font-size: 14px;
+	border-radius: 5px;
+	margin: 10px auto;
+}
