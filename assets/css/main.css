@@ -77,7 +77,7 @@ a {
 	border-image: linear-gradient(to right, rgba(106,77,59,0) 0%,rgba(106,77,59,0.5) 10%,rgba(106,77,59,0.92) 20%,rgba(106,77,59,1) 50%,rgba(106,77,59,0.92) 80%,rgba(106,77,59,0.5) 90%,rgba(106,77,59,0) 100%) 1 0 1 0 stretch repeat;
 }
 .border-button {
-	display: block;
+	display: block !important;
 	padding: 10px;
 	font-size: 26px;
 	margin: 30px auto;
