@@ -70,27 +70,31 @@ right: 10px;
 	width: 245px;
 	height: 226px;
 	float: left;
-	background-position: -45px -10px;
 }
 .erb-svetli-elfovia {
 	background: url('/assets/images/erbs/Elfovia-erb.png') no-repeat;
 	background-size: 350px;
+	background-position: -45px -10px;
 }
 .erb-temni-elfovia {
 	background: url('/assets/images/erbs/Temni-elfovia-erb.png') no-repeat;
 	background-size: 350px;
+	background-position: -45px -10px;
 }
 .erb-severania {
 	background: url('/assets/images/erbs/Severania-erb.png') no-repeat;
 	background-size: 350px;
+	background-position: -45px -10px;
 }
 .erb-cigani {
 	background: url('/assets/images/erbs/Cigani-erb.png') no-repeat;
 	background-size: 350px;
+	background-position: -45px -10px;
 }
 .erb-juzania {
 	background: url('/assets/images/erbs/Juzania-erb.png') no-repeat;
 	background-size: 330px;
+	background-position: -45px -10px;
 }
 /**
  * ----------------------------------------
