@@ -43,3 +43,60 @@ div.error {
 	border-radius: 5px;
 	margin: 10px auto;
 }
+.step-2 {
+	position: relative;
+}
+/**
+ * Erbs - css for race erbs in registration
+ */
+.erbs {
+	width: 245px;
+	overflow: hidden;
+}
+.scroll-wrapper {
+	width: 2000px;
+}
+.arrow-right, .arrow-right {
+	position: absolute;
+	font-size: 16px;
+	top: 100px;
+}
+.arrow-left {
+	left: 10px;
+}
+.arrow-right {
+right: 10px;
+}
+.erb {
+	overflow: hidden;
+	width: 245px;
+	height: 226px;
+}
+.erb-svetli-elfovia {
+	background: url('Elfovia-erb.png') no-repeat;
+	background-size: 350px;
+	background-position: -45px 0;
+}
+.erb-temni-elfovia {
+	background: url('temni-elfovia-erb.png') no-repeat;
+	background-size: 350px;
+	background-position: -45px 0;
+}
+.erb-severania {
+	background: url('Severania-erb.png') no-repeat;
+	background-size: 350px;
+	background-position: -45px 0;
+}
+.erb-cigani {
+	background: url('Cigani-erb.png') no-repeat;
+	background-size: 350px;
+	background-position: -45px 0;
+}
+.erb-juzania {
+	background: url('Juzania-erb.png') no-repeat;
+	background-size: 330px;
+	background-position: -45px 0;
+}
+/**
+ * ----------------------------------------
+ */

@@ -10,7 +10,7 @@
 	</header>
 	<div class="overlay">
 		<div id="content" class="margin-auto">
-			<h1>Vytvorenie účtu</h1>
+			<h1 class="step-1">Vytvorenie účtu</h1>
 			<div class="intro step-1">
 				<p>Pre vstup do Gallenmoru budeš používať jeden jediný účet, na ktorom môžeš mať viacero postáv. Prosíme Ťa, aby si poctivo vyplnil všetky polia. Na Tvoj email <u>nikdy</u> nepošleme spam a nikomu ho neposkytneme ďalej. Slúži výhradne na posielanie zabudnutého hesla alebo oznamovanie veľkých udalostí (nové funkcie na stránke, masívne RPG udalosti, etc.). Dátum narodenia nikde nezobrazujeme, slúži na interné účely. Tieto údaje sú o Tebe ako reálnej osobe. Ku vytvoreniu postavy sa dostaneš v neskoršom kroku.</p>
 			</div>
@@ -24,11 +24,25 @@
 				</form>
 			</div>
 			<a href="#" data-step="2" class="step-1 fade-borders border-button fade-background">Ďalší krok</a>
+
+			<h1 class="step-2">Výber rasy</h1>
 			<div class="fade-borders fade-background step-2">
-				noa co ty gadyike.
-
-			</div>
-
+				<div class="race-pick">
+					<span class="arrow-left">&lt;</span>
+					<div class="erbs">
+						<div class="scroll-wrapper">
+							<div class="erb erb-svetli-elfovia"></div>
+							<div class="erb erb-juzania"></div>
+							<div class="erb erb-severania"></div>
+							<div class="erb erb-cigani"></div>
+							<div class="erb erb-temni-elfovia"></div>
+						</div><!-- scroll-wrapper -->
+					</div><!-- erbs -->
+					<span class="arrow-right">&gt;</span>
+				</div> <!-- race-pick -->
+			</div><!-- step-2 -->
+			<a href="#" data-step="3" class="step-2 fade-borders border-button fade-background">Ďalší krok</a>
+			
 		</div>
 	</div>
 </div>
