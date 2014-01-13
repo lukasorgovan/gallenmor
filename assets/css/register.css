@@ -22,7 +22,12 @@
 	border-radius: 5px;
 }
 h1 {
-	text-transform: uppercase;
+	text-transform: capitalize;
+}
+h2 {
+	font-size:  42px;
+	font-weight: normal;
+	font-style: italic;
 }
 input {
 	margin: 15px auto;
@@ -57,13 +62,13 @@ div.error {
 .arrow-left, .arrow-right {
 	position: absolute;
 	font-size: 50px;
-	top: 75px;
+	top: 265px;
 }
 .arrow-left {
-	left: 10px;
+	left: 30px;
 }
 .arrow-right {
-right: 10px;
+right: 30px;
 }
 .erb {
 	overflow: hidden;

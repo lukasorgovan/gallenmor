@@ -26,12 +26,13 @@
 body {
 	background: #000 url('/assets/images/registration/topbar.jpg') repeat-x;
 	color: #9C9375;
-	font-family: "Alegreya", Georgia, serif;
+	font-family: "Gentium Basic", Georgia, serif;
 	font-size: 18px;
 	padding-top: 35px;
+	line-height: 1.38em;
 }
 h1 {
-	color: #f6f3c9;
+	color: #898989;
 	font-family: "Metamorphous", Arial, sans-serif;
 	font-size: 18px;
 }

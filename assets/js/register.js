@@ -30,7 +30,7 @@ $("a[class*='step']").on('click', function(event) {
 	});
 	if (valid) {
 		$('.step-'+prevStep).css('display', 'none');
-		$('.step-'+nextStep).css.('display', 'block');
+		$('.step-'+nextStep).css('display', 'block');
 	}
 	
 });

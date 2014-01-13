@@ -26,19 +26,21 @@
 			<a href="#" data-step="2" class="step-1 fade-borders border-button fade-background">Ďalší krok</a>
 
 			<h1 class="step-2">Výber rasy</h1>
+			<h2 class="step-2">Svetlí Elfovia</h2>
+			<div class="intro step-2">Ak sa chceš dozvedieť viac o tejto rase, klikni na Erb.</div>
 			<div class="fade-borders fade-background step-2">
 				<div class="race-pick">
-					<span class="arrow-left">&lt;</span>
+					<span class="arrow-left">↞</span>
 					<div class="erbs">
 						<div class="scroll-wrapper">
-							<div class="erb erb-svetli-elfovia"></div>
+							<a href="#" data-reveal-id="modal"><div class="erb erb-svetli-elfovia"></div></a>
 							<div class="erb erb-juzania"></div>
 							<div class="erb erb-severania"></div>
 							<div class="erb erb-cigani"></div>
 							<div class="erb erb-temni-elfovia"></div>
 						</div><!-- scroll-wrapper -->
 					</div><!-- erbs -->
-					<span class="arrow-right">&gt;</span>
+					<span class="arrow-right">↠</span>
 				</div> <!-- race-pick -->
 			</div><!-- step-2 -->
 			<a href="#" data-step="3" class="step-2 fade-borders border-button fade-background">Ďalší krok</a>
@@ -46,5 +48,9 @@
 		</div>
 	</div>
 </div>
-
+<div id="modal" class="reveal-modal xlarge">
+	<h1>Reveal Modal Goodness</h1>
+	<p>This is a default modal in all its glory, but any of the styles here can easily be changed in the CSS.</p>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
 <?php $this->load->view('footer', array('scriptPath' => '/assets/js/register.js')); ?>
