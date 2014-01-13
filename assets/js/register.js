@@ -29,8 +29,8 @@ $("a[class*='step']").on('click', function(event) {
 		return valid;
 	});
 	if (valid) {
-		$('.step-'+prevStep).hide(400);
-		$('.step-'+nextStep).show(400);
+		$('.step-'+prevStep).css('display', 'none');
+		$('.step-'+nextStep).css.('display', 'block');
 	}
 	
 });
