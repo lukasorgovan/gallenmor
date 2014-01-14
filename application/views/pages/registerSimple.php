@@ -30,17 +30,17 @@
 			<div class="intro step-2">Ak sa chceš dozvedieť viac o tejto rase, klikni na Erb.</div>
 			<div class="fade-borders fade-background step-2">
 				<div class="race-pick">
-					<span class="arrow-left">↞</span>
+					<span class="arrow-left">&larr;</span>
 					<div class="erbs">
 						<div class="scroll-wrapper">
-							<a href="#" data-reveal-id="modal"><div class="erb erb-svetli-elfovia"></div></a>
+							<a href="#" data-reveal-id="modal"><div class="erb erb-svetli-elfovia selected"></div></a>
 							<div class="erb erb-juzania"></div>
 							<div class="erb erb-severania"></div>
 							<div class="erb erb-cigani"></div>
 							<div class="erb erb-temni-elfovia"></div>
 						</div><!-- scroll-wrapper -->
 					</div><!-- erbs -->
-					<span class="arrow-right">↠</span>
+					<span class="arrow-right">&rarr;</span>
 				</div> <!-- race-pick -->
 			</div><!-- step-2 -->
 			<a href="#" data-step="3" class="step-2 fade-borders border-button fade-background">Ďalší krok</a>

@@ -1,4 +1,11 @@
-
+::selection {
+	background: rgb(112,180,164);
+	color: #fff;
+}
+::-moz-selection {
+	background: rgb(112,180,164);
+	color: #fff;
+}
 .e404 body {
 	margin: 200px !important;
 	background-color: #000 !important;
