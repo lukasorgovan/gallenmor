@@ -18,19 +18,26 @@ if (overlay.length !== 0) {
 $("a[class*='step']").on('click', function(event) {
 	
 	event.preventDefault();
+	if ($(this).data('back')) {
+		// rever
+		var showStep = $(this).data('step'),
+			hideStep = showStep + 1,
+			valid = true;
+	}
+	else {
+		var showStep = $(this).data('step'),
+		 	hideStep = showStep - 1;
 	
-	var nextStep = $(this).data('step'),
-	prevStep = nextStep - 1;
+		$('input.step-'+hideStep).each(function() {
+			var $self = $(this);
+			valid = checkField($self.attr('name'), this.value, {type: 'focusout'}, $self);
+			return valid;
+		});	
+	}
 	
-	$('input.step-'+prevStep).each(function() {
-		var $self = $(this);
-		valid = checkField($self.attr('name'), this.value, {type: 'focusout'}, $self);
-		console.log(valid);
-		return valid;
-	});
 	if (valid) {
-		$('.step-'+prevStep).css('display', 'none');
-		$('.step-'+nextStep).css('display', 'block');
+		$('.step-'+hideStep).css('display', 'none');
+		$('.step-'+showStep).css('display', 'block');
 	}
 	
 });
@@ -71,6 +78,11 @@ function checkField(fieldName, fieldValue, event, $element) {
 		case 'email':
 			var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 			result = reg.test(fieldValue) ? true : 'email';
+			break;
+		case 'race':
+			var allowedRaces = ['svetli-elfovia', 'juzania'],
+			result = allowedRaces.indexOf(fieldValue) !== -1 ? true : 'race-not-allowed';
+			break;
 	}
 	if (event.type == 'focusin') {
 		$element.removeClass('shake error');
@@ -105,14 +117,14 @@ function checkAvailibility(requestURI, dataObject, fieldName) {
  * @return {bool}
  */
 function checkResult(fieldName, result) {
-	if (result !== true) {
+	if (result === true) {
+			$('#msg-'+fieldName).hide(400);
+			return true;
+		}
+		else {
 			$("input[name='"+fieldName+"']").addClass('shake error');
 			$('#msg-'+fieldName).html(result).show(400);
 			return false;
-		}
-		else {
-			$('#msg-'+fieldName).hide(400);
-			return true;
 		}
 }
 
