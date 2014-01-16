@@ -9,11 +9,21 @@ if (overlay.length !== 0) {
 		backgroundColor: 'rgba(0,0,0,0.73)'
 	});
 }
-var myScroll = new IScroll('#scroll-wrapper', {
-    scrollX: true, 
-    scrollY: false,
-    snap: 'div'
+$('body').one('initScroller', function() {
+	window.myScroll = new IScroll('#scroll-wrapper', {
+   		scrollX: true, 
+    		scrollY: false,
+    		snap: 'div'
+	});
+	myScroll.on('scrollEnd', function() {
+		// select second class from active scroller element
+		var race = this.scroller.children[this.currentPage.pageX].classList[1];
+		// transform erb-juzania to juzania and set as value of hidden field
+		race = race.substring(4);
+		$('#race').val(race);
+	});
 });
+
 /**
  * Bind steps buttons, do sanity field check on client side
  * @param  {object} event recorded event
@@ -42,8 +52,17 @@ $("a[class*='step']").on('click', function(event) {
 	if (valid) {
 		$('.step-'+hideStep).css('display', 'none');
 		$('.step-'+showStep).css('display', 'block');
+		// Trigger custom event to initialize iScroll on race pick
+		if (showStep === 2) {
+			var e = jQuery.Event('initScroller');
+			$('body').trigger(e);
+		}
 	}
-	
+
+});
+// Bind race pick arrows
+$('.scroller-arrow').on('click', function() {
+	$(this).data('dir') === 'left' ? myScroll.prev() : myScroll.next();
 });
 
 // Do sanity field check on focus IN/OUT

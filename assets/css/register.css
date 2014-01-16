@@ -51,9 +51,10 @@ div.error {
 /**
  * Erbs - css for race erbs in registration
  */
-#sroll-wrapper {
+#scroll-wrapper {
 	width: 245px;
 	height: 225px;
+	position: relative;
 }
 .erbs {
 	width: 245px;
@@ -74,6 +75,10 @@ div.error {
 }
 .scroller-arrow {
 	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 .arrow-left {
 	left: 30px;

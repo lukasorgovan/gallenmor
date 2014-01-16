@@ -34,7 +34,7 @@
 					<span class="scroller-arrow arrow-left" data-dir="left">&larr;</span>
 					<div class="erbs" id="scroll-wrapper">
 						<div class="scroller">
-							<div class="erb erb-svetli-elfovia selected"></div>
+							<div class="erb erb-svetli-elfovia"></div>
 							<div class="erb erb-juzania"></div>
 							<div class="erb erb-severania"></div>
 							<div class="erb erb-cigani"></div>
