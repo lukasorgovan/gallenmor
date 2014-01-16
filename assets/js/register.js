@@ -9,7 +9,11 @@ if (overlay.length !== 0) {
 		backgroundColor: 'rgba(0,0,0,0.73)'
 	});
 }
-
+var myScroll = new IScroll('#scroll-wrapper', {
+    scrollX: true, 
+    scrollY: false,
+    snap: 'div'
+});
 /**
  * Bind steps buttons, do sanity field check on client side
  * @param  {object} event recorded event
@@ -127,7 +131,21 @@ function checkResult(fieldName, result) {
 			return false;
 		}
 }
-
+/**
+ * Move carousel
+ * @param  {number} distance  How much should carousel be moved
+ * @param  {string} dir 			Direction left/right
+ * @return {void}           	Moves scroller-wrapper
+ */
+function moveScroller($elem, distance, dir) {
+	var offset = $elem.offset().left;
+	if (dir === "left") {
+		$elem.offset({left: offset + distance});
+	}
+	else {
+		$elem.offset({left: offset - distance});
+	}
+}
 /*
 var reg = /^([a-zľščťžýáíéúäňôö']{2,} '?[a-zľščťžýáíéúäňôö']{2,}( ?'?[a-zľščťžýáíéúäňôö']{2,})?)$/i;
 	if (reg.test(formName))

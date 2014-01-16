@@ -51,27 +51,37 @@ div.error {
 /**
  * Erbs - css for race erbs in registration
  */
+#sroll-wrapper {
+	width: 245px;
+	height: 225px;
+}
 .erbs {
 	width: 245px;
+	height: 225px;
 	overflow: hidden;
 	margin: 0 auto;
 }
-.scroll-wrapper {
+.scroller {
+	position: absolute;
 	width: 2000px;
+	overflow: auto;
+	height: 225px;
 }
 .arrow-left, .arrow-right {
 	position: absolute;
 	font-size: 50px;
 	top: 265px;
 }
+.scroller-arrow {
+	cursor: pointer;
+}
 .arrow-left {
 	left: 30px;
 }
 .arrow-right {
-right: 30px;
+	right: 30px;
 }
 .erb {
-	overflow: hidden;
 	width: 245px;
 	height: 226px;
 	float: left;

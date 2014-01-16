@@ -31,17 +31,17 @@
 			<div class="fade-borders fade-background step-2">
 				<input type="hidden" name="race" id="race" class="step-2" value="svetli-elfovia"/>
 				<div class="race-pick">
-					<span class="arrow-left">&larr;</span>
-					<div class="erbs">
-						<div class="scroll-wrapper">
-							<a href="#" data-reveal-id="modal"><div class="erb erb-svetli-elfovia selected"></div></a>
+					<span class="scroller-arrow arrow-left" data-dir="left">&larr;</span>
+					<div class="erbs" id="scroll-wrapper">
+						<div class="scroller">
+							<div class="erb erb-svetli-elfovia selected"></div>
 							<div class="erb erb-juzania"></div>
 							<div class="erb erb-severania"></div>
 							<div class="erb erb-cigani"></div>
 							<div class="erb erb-temni-elfovia"></div>
 						</div><!-- scroll-wrapper -->
 					</div><!-- erbs -->
-					<span class="arrow-right">&rarr;</span>
+					<span class="scroller-arrow arrow-right" data-dir="right">&rarr;</span>
 					<div id="msg-race" class="error"></div>
 				</div> <!-- race-pick -->
 			</div><!-- step-2 -->
