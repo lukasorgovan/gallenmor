@@ -1,75 +1,102 @@
-// Initial settings
-var overlay = $('.overlay'),
-valid = false;
+(function($) {
+	// Initial settings
+	var overlay = $('.overlay'),
+	valid = false;
 
-// Set the height of overlay properly to screen size
-if (overlay.length !== 0) {
-	overlay.css({
-		height: $(document).height() + 'px',
-		backgroundColor: 'rgba(0,0,0,0.73)'
+	// Set the height of overlay properly to screen size
+	if (overlay.length !== 0) {
+		overlay.css({
+			height: $(document).height() + 'px',
+			backgroundColor: 'rgba(0,0,0,0.73)'
+		});
+	}
+
+	getRaces();
+
+	$('body').one('initScroller', function() {
+		window.myScroll = new IScroll('#scroll-wrapper', {
+	   		scrollX: true, 
+	    		scrollY: false,
+	    		snap: 'div'
+		});
+		myScroll.on('scrollEnd', function() {
+		
+			// select second class from active scroller element
+			var race = this.scroller.children[this.currentPage.pageX].classList[1];
+			
+			// transform erb-juzania to juzania and set as value of hidden field
+			race = race.substring(4);
+			$('#race').val(race);
+			
+			if (window.races) {
+				var currentRace = window.races[race];
+				$('#race-headline').html(currentRace.name);
+				$('#modal').html('<h1>' + currentRace.name + '</h1><p>' + currentRace.desc + '</p>');
+			}
+		}); // myScroll.on
+	});
+
+	/**
+	 * Bind steps buttons, do sanity field check on client side
+	 * @param  {object} event recorded event
+	 * @return {void}
+	 */
+	$("a[class*='step']").on('click', function(event) {
+		
+		event.preventDefault();
+		if ($(this).data('back')) {
+			// rever
+			var showStep = $(this).data('step'),
+				hideStep = showStep + 1,
+				valid = true;
+		}
+		else {
+			var showStep = $(this).data('step'),
+			 	hideStep = showStep - 1;
+		
+			$('input.step-'+hideStep).each(function() {
+				var $self = $(this);
+				valid = checkField($self.attr('name'), this.value, {type: 'focusout'}, $self);
+				return valid;
+			});	
+		}
+		
+		if (valid) {
+			$('.step-'+hideStep).css('display', 'none');
+			$('.step-'+showStep).css('display', 'block');
+			// Trigger custom event to initialize iScroll on race pick
+			
+			if (showStep === 2) {
+				
+				// Try to get races data if the first call was unsuccessfull
+				(window.races) ? {} :	getRaces();
+				
+				var e = jQuery.Event('initScroller');
+				$('body').trigger(e);
+			}
+		}
+
+	});
+	// Bind race pick arrows
+	$('.scroller-arrow').on('click', function() {
+		$(this).data('dir') === 'left' ? myScroll.prev() : myScroll.next();
+	});
+
+	// Do sanity field check on focus IN/OUT
+	$("input").on('focusin focusout', function (event) {
+		checkField($(this).attr('name'), this.value, event, $(this));
+	});
+
+})(jQuery);
+
+
+
+function getRaces() {
+	// Get races data and make 
+	$.get('/api/races', function(data) {
+		window.races = data;
 	});
 }
-$('body').one('initScroller', function() {
-	window.myScroll = new IScroll('#scroll-wrapper', {
-   		scrollX: true, 
-    		scrollY: false,
-    		snap: 'div'
-	});
-	myScroll.on('scrollEnd', function() {
-		// select second class from active scroller element
-		var race = this.scroller.children[this.currentPage.pageX].classList[1];
-		// transform erb-juzania to juzania and set as value of hidden field
-		race = race.substring(4);
-		$('#race').val(race);
-	});
-});
-
-/**
- * Bind steps buttons, do sanity field check on client side
- * @param  {object} event recorded event
- * @return {void}
- */
-$("a[class*='step']").on('click', function(event) {
-	
-	event.preventDefault();
-	if ($(this).data('back')) {
-		// rever
-		var showStep = $(this).data('step'),
-			hideStep = showStep + 1,
-			valid = true;
-	}
-	else {
-		var showStep = $(this).data('step'),
-		 	hideStep = showStep - 1;
-	
-		$('input.step-'+hideStep).each(function() {
-			var $self = $(this);
-			valid = checkField($self.attr('name'), this.value, {type: 'focusout'}, $self);
-			return valid;
-		});	
-	}
-	
-	if (valid) {
-		$('.step-'+hideStep).css('display', 'none');
-		$('.step-'+showStep).css('display', 'block');
-		// Trigger custom event to initialize iScroll on race pick
-		if (showStep === 2) {
-			var e = jQuery.Event('initScroller');
-			$('body').trigger(e);
-		}
-	}
-
-});
-// Bind race pick arrows
-$('.scroller-arrow').on('click', function() {
-	$(this).data('dir') === 'left' ? myScroll.prev() : myScroll.next();
-});
-
-// Do sanity field check on focus IN/OUT
-$("input").on('focusin focusout', function (event) {
-	checkField($(this).attr('name'), this.value, event, $(this));
-});
-
 /**
  * Checks the current field based on regexp and other conditions
  * @param  {string} fieldName  name of the checked field

@@ -26,7 +26,7 @@
 			<a href="#" data-step="2" class="step-1 fade-borders border-button fade-background">Ďalší krok</a>
 
 			<h1 class="step-2">Výber rasy</h1>
-			<h2 class="step-2">Svetlí Elfovia</h2>
+			<h2 class="step-2" id="race-headline">Svetlí Elfovia</h2>
 			<div class="intro step-2">Ak sa chceš dozvedieť viac o tejto rase, klikni na Erb.</div>
 			<div class="fade-borders fade-background step-2">
 				<input type="hidden" name="race" id="race" class="step-2" value="svetli-elfovia"/>
