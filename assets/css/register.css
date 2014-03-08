@@ -90,6 +90,7 @@ div.error {
 	width: 245px;
 	height: 226px;
 	float: left;
+	cursor: pointer;
 }
 .erb-svetli-elfovia {
 	background: url('/assets/images/erbs/Elfovia-erb.png') no-repeat;

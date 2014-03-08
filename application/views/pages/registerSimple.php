@@ -48,7 +48,22 @@
 			<a href="#" data-step="3" class="step-2 fade-borders border-button fade-background">Ďalší krok</a>
 			<a href="#" data-step="1" data-back="true" class="step-2 back">Späť</a>
 
-			<h1 class="step-3">Výber rasy</h1>
+			<h1 class="step-3">Vytvorenie postavy</h1>
+			<div class="intro step-3">
+				<p>Info description</p>
+			</div>
+			<div class="fade-borders fade-background step-3">
+				<input type="text" name="charname" class="step-3" placeholder="meno postavy" required="required"/><div id="msg-username" class="error"></div>
+				<input type="text" name="age" class="step-3" placeholder="vek postavy" required="required"/><div id="msg-email" class="error"></div>
+				<select name="gender">
+					<option value="male">Muž</option>
+					<option value="female">Žena</option>
+				</select>
+				<label for="bodytype">Typ postavy</label>
+				N<input type="range" name="bodytype" min="1" max="10" />V
+				
+			</div>
+			<a href="#" data-step="4" class="step-3 fade-borders border-button fade-background">Dokončiť registráciu</a>
 			<a href="#" data-step="2" data-back="true" class="step-3 back">Späť</a>
 		</div>
 	</div>

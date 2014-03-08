@@ -10,8 +10,8 @@
 	</header>
 	<div class="overlay">
 		<div id="content" class="margin-auto">
-			<a href="/register/simple" class="fade-borders fade-background border-button">Začiatočník</a>
-			<a href="/register/advanced" class="fade-borders fade-background border-button">Pokročilý<a>
+			<a href="#" class="fade-borders fade-background border-button">Čo je to Gallenmor?</a>
+			<a href="/register/simple" class="fade-borders fade-background border-button">Chcem sa registrovať<a>
 		</div>
 	</div>
 </div>

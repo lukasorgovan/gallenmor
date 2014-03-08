@@ -35,7 +35,9 @@
 			}
 		}); // myScroll.on
 	});
-
+	$('.erb').on('click', function() {
+		$('#modal').reveal();
+	});
 	/**
 	 * Bind steps buttons, do sanity field check on client side
 	 * @param  {object} event recorded event
@@ -133,6 +135,22 @@ function checkField(fieldName, fieldValue, event, $element) {
 			var allowedRaces = ['svetli-elfovia', 'juzania'],
 			result = allowedRaces.indexOf(fieldValue) !== -1 ? true : 'race-not-allowed';
 			break;
+		case 'charname': 
+			var reg = /^([a-zľščťžýáíéúäňôö']{2,} '?[a-zľščťžýáåäíéúňôö']{2,}( ?'?[a-zľščťžýäáäíéúňôö']{2,})?)$/i,
+			result = reg.test(fieldValue) ? true : 'charname';
+			break;
+		case 'age':
+			var reg = /^[0-9]{1,4}$/,
+			result = reg.test(fieldValue) ? true : 'age';
+			break;
+		case 'gender':
+			var result = (fieldValue === 'male' || fieldValue === 'female') ? true : 'gender';
+			break;
+		case 'bodytype':
+			var result = true;
+			break;
+		default:
+			result = 'unknown';
 	}
 	if (event.type == 'focusin') {
 		$element.removeClass('shake error');
@@ -192,7 +210,3 @@ function moveScroller($elem, distance, dir) {
 		$elem.offset({left: offset - distance});
 	}
 }
-/*
-var reg = /^([a-zľščťžýáíéúäňôö']{2,} '?[a-zľščťžýáåäíéúňôö']{2,}( ?'?[a-zľščťžýäáäíéúňôö']{2,})?)$/i;
-	if (reg.test(formName))
-*/
