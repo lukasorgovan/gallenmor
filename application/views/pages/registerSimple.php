@@ -50,19 +50,22 @@
 
 			<h1 class="step-3">Vytvorenie postavy</h1>
 			<div class="intro step-3">
-				<p>Info description</p>
+				<p>Výborne, ostáva už len jeden krok pre dokončenie registrácie a tým je vytvorenie tvojej postavy. Pri vytvárani mena sa kreativite medze nekladú, no dbaj na to aby pasovalo pre rasu, ktorú si si zvolil. </p>
 			</div>
 			<div class="fade-borders fade-background step-3">
-				<input type="text" name="charname" class="step-3" placeholder="meno postavy" required="required"/><div id="msg-username" class="error"></div>
-				<input type="text" name="age" class="step-3" placeholder="vek postavy" required="required"/><div id="msg-email" class="error"></div>
+				<input type="text" name="charname" class="step-3" placeholder="meno postavy" required="required"/><div id="msg-charname" class="error"></div>
+				<input type="text" name="age" class="step-3" placeholder="vek postavy" required="required"/><div id="msg-age" class="error"></div>
 				<select name="gender">
 					<option value="male">Muž</option>
 					<option value="female">Žena</option>
 				</select>
+				<div id="msg-gender" class="error"></div>
 				<label for="bodytype">Typ postavy</label>
 				N<input type="range" name="bodytype" min="1" max="10" />V
 				
 			</div>
+
+
 			<a href="#" data-step="4" class="step-3 fade-borders border-button fade-background">Dokončiť registráciu</a>
 			<a href="#" data-step="2" data-back="true" class="step-3 back">Späť</a>
 		</div>
@@ -73,4 +76,4 @@
 	<p>This is a default modal in all its glory, but any of the styles here can easily be changed in the CSS.</p>
 	<a class="close-reveal-modal">&#215;</a>
 </div>
-<?php $this->load->view('footer', array('scriptPath' => '/assets/js/register.js')); ?>
+<?php $this->load->view('footer', array('scriptPath' => array('/assets/js/register.js', '/assets/js/messages.js'))); ?>

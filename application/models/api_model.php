@@ -25,6 +25,28 @@ Class Api_model extends CI_Model {
 			return $messages['error_generate_name'];
 		}
 	}
+
+	function races_get() {
+		$sql = "SELECT * FROM races";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0) {
+			$data = array();
+			foreach ($query->result() as $row) {
+				$data[$row->codename] = array(
+					"id" => $row->id,
+					"name" => $row->name,
+					"description" => $row->description,
+					"racial" => $row->racial,
+					"history" => $row->history
+					);
+			} 
+			return $data;
+		}
+		else {
+			return false;
+		}
+	}
+
 	function checkUserNameAvailibility($name) {
 		$sql = "SELECT COUNT(*) AS pocet FROM users WHERE username = ?";
 		$query = $this->db->query($sql, array($name));

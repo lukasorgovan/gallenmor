@@ -10,12 +10,15 @@
 			backgroundColor: 'rgba(0,0,0,0.73)'
 		});
 	}
-
+	// Try to get races.
 	getRaces();
-
+	// Uppon succesfull retrieval of races, change race desc. in modal
+	$('body').one('racesReady', function() {
+		$('#modal').html('<h1>' + races['svetli-elfovia'].name + '</h1>' + races['svetli-elfovia'].description);
+	});
 	$('body').one('initScroller', function() {
 		window.myScroll = new IScroll('#scroll-wrapper', {
-	   		scrollX: true, 
+	   			scrollX: true, 
 	    		scrollY: false,
 	    		snap: 'div'
 		});
@@ -31,10 +34,11 @@
 			if (window.races) {
 				var currentRace = window.races[race];
 				$('#race-headline').html(currentRace.name);
-				$('#modal').html('<h1>' + currentRace.name + '</h1><p>' + currentRace.desc + '</p>');
+				$('#modal').html('<h1>' + currentRace.name + '</h1>' + currentRace.description);
 			}
 		}); // myScroll.on
 	});
+
 	$('.erb').on('click', function() {
 		$('#modal').reveal();
 	});
@@ -97,6 +101,8 @@ function getRaces() {
 	// Get races data and make 
 	$.get('/api/races', function(data) {
 		window.races = data;
+		var e = jQuery.Event('racesReady');
+		$('body').trigger(e);
 	});
 }
 /**
@@ -125,7 +131,7 @@ function checkField(fieldName, fieldValue, event, $element) {
 			result = reg.test(fieldValue) ? true : 'password';
 			break;
 		case 'password-check':			
-			result = (fieldValue === $("input[name='password']").val()) ? true : 'password-check';
+			result = (fieldValue === $("input[name='password']").val()) ? true : 'passwordCheck';
 			break;
 		case 'email':
 			var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -133,7 +139,7 @@ function checkField(fieldName, fieldValue, event, $element) {
 			break;
 		case 'race':
 			var allowedRaces = ['svetli-elfovia', 'juzania'],
-			result = allowedRaces.indexOf(fieldValue) !== -1 ? true : 'race-not-allowed';
+			result = allowedRaces.indexOf(fieldValue) !== -1 ? true : 'race';
 			break;
 		case 'charname': 
 			var reg = /^([a-zľščťžýáíéúäňôö']{2,} '?[a-zľščťžýáåäíéúňôö']{2,}( ?'?[a-zľščťžýäáäíéúňôö']{2,})?)$/i,
@@ -191,7 +197,7 @@ function checkResult(fieldName, result) {
 		}
 		else {
 			$("input[name='"+fieldName+"']").addClass('shake error');
-			$('#msg-'+fieldName).html(result).show(400);
+			$('#msg-'+fieldName).html(systemMessages.register[result]).show(400);
 			return false;
 		}
 }

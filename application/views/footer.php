@@ -3,7 +3,9 @@
 <script type="text/javascript" src="/assets/js/iscroll.js"></script>
 <?php
 	if(isset($scriptPath)) {
-		echo '<script src="'.$scriptPath.'"></script>';
+		foreach ($scriptPath as $script) {
+			echo '<script src="'.$script.'"></script>';
+		}
 	}
 ?>
 </body>
