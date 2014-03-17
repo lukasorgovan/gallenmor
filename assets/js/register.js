@@ -1,6 +1,8 @@
 (function($) {
 	// Initial settings
 	var overlay = $('.overlay'),
+	selectedRace = 'svetli-elfovia',
+	generatorPosition = 0,
 	valid = false;
 
 	// Set the height of overlay properly to screen size
@@ -11,7 +13,7 @@
 		});
 	}
 	// Try to get races.
-	getRaces();
+	getApiData('/api/races', 'races', 'racesReady');
 	// Uppon succesfull retrieval of races, change race desc. in modal
 	$('body').one('racesReady', function() {
 		$('#modal').html('<h1>' + races['svetli-elfovia'].name + '</h1>' + races['svetli-elfovia'].description);
@@ -28,11 +30,11 @@
 			var race = this.scroller.children[this.currentPage.pageX].classList[1];
 			
 			// transform erb-juzania to juzania and set as value of hidden field
-			race = race.substring(4);
-			$('#race').val(race);
+			selectedRace = race.substring(4);
+			$('#race').val(selectedRace);
 			
 			if (window.races) {
-				var currentRace = window.races[race];
+				var currentRace = window.races[selectedRace];
 				$('#race-headline').html(currentRace.name);
 				$('#modal').html('<h1>' + currentRace.name + '</h1>' + currentRace.description);
 			}
@@ -42,6 +44,11 @@
 	$('.erb').on('click', function() {
 		$('#modal').reveal();
 	});
+
+	$("input[name='username']").on('focusin', function() {
+		$('.hint').show(400);
+	});
+
 	/**
 	 * Bind steps buttons, do sanity field check on client side
 	 * @param  {object} event recorded event
@@ -75,10 +82,16 @@
 			if (showStep === 2) {
 				
 				// Try to get races data if the first call was unsuccessfull
-				(window.races) ? {} :	getRaces();
+				(window.races) ? {} :	getApiData('/api/races', 'races', 'racesReady');
 				
 				var e = jQuery.Event('initScroller');
 				$('body').trigger(e);
+				window.generatedNames = undefined;
+				generatorPosition = 0;
+				$('#generator').css('visibility', 'hidden');
+			}
+			else if (showStep === 3) {
+				getApiData('/api/generator/' + selectedRace, 'generatedNames', 'namesReady');
 			}
 		}
 
@@ -93,16 +106,36 @@
 		checkField($(this).attr('name'), this.value, event, $(this));
 	});
 
+	$('#generator').on('click', function() {
+		if (window.generatedNames) {
+			var max = window.generatedNames.length - 1;
+			$('#charname').val(window.generatedNames[generatorPosition].nickname);
+			generatorPosition = generatorPosition === max ? 0 : ++generatorPosition;
+		}
+	});
+	$('body').on('namesReady', function() {
+		$('#generator').css('visibility', 'visible')
+	})
+
 })(jQuery);
 
 
-
-function getRaces() {
+/**
+ * General method for getting data via GET method from API
+ * @param  {string} url          url to get
+ * @param  {string} storeVar     if set, stores data in window object
+ * @param  {string} triggerEvent if set, triggers event on body element
+ * @return {response}              data
+ */
+function getApiData(url, storeVar, triggerEvent) {
 	// Get races data and make 
-	$.get('/api/races', function(data) {
-		window.races = data;
-		var e = jQuery.Event('racesReady');
-		$('body').trigger(e);
+	$.get(url, function(data) {
+		(storeVar) ? window[storeVar] = data : {};
+		if (triggerEvent) {
+			var e = jQuery.Event(triggerEvent);
+			$('body').trigger(e);
+		}
+		return data;
 	});
 }
 /**
@@ -138,7 +171,7 @@ function checkField(fieldName, fieldValue, event, $element) {
 			result = reg.test(fieldValue) ? true : 'email';
 			break;
 		case 'race':
-			var allowedRaces = ['svetli-elfovia', 'juzania'],
+			var allowedRaces = Object.keys(window.races),
 			result = allowedRaces.indexOf(fieldValue) !== -1 ? true : 'race';
 			break;
 		case 'charname': 

@@ -86,6 +86,37 @@ div.error {
 .arrow-right {
 	right: 30px;
 }
+.hint {
+	padding: 20px;
+	width: 400px;
+	margin: 10px auto;
+	background: rgba(15, 73, 50,0.2);
+	color: rgb(162, 153, 119);
+	border-radius: 12px;
+	box-shadow: 0 0 20px rgb(12, 158, 100);
+	display: none;
+}
+#generator {
+	display: inline-block;
+	margin: 0 10px;
+	width: 26px;
+	height: 26px;
+	background-color: #065468;
+	border-radius: 13px;
+	text-shadow: 0 -1px 0 #000;
+	line-height: 25px;
+	box-shadow: 0 0 5px #00EBFF;
+	cursor: pointer;
+	transition: all 0.3s;
+	visibility: hidden;
+}
+#generator:hover {
+	width: 100px;
+	background: rgb(18, 75, 62);
+}
+#generator:hover:after {
+	content: 'enerator';
+}
 .erb {
 	width: 245px;
 	height: 226px;

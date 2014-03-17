@@ -17,6 +17,7 @@
 				<p>Pre vstup do Gallenmoru budeš používať jeden jediný účet, na ktorom môžeš mať viacero postáv. Prosíme Ťa, aby si poctivo vyplnil všetky polia. Na Tvoj email <u>nikdy</u> nepošleme spam a nikomu ho neposkytneme ďalej. Slúži výhradne na posielanie zabudnutého hesla alebo oznamovanie veľkých udalostí (nové funkcie na stránke, masívne RPG udalosti, etc.). Dátum narodenia nikde nezobrazujeme, slúži na interné účely. Tieto údaje sú o Tebe ako reálnej osobe. Ku vytvoreniu postavy sa dostaneš v neskoršom kroku.</p>
 			</div>
 			<div class="fade-borders fade-background step-1">
+				<div class="step-1 hint">Používateľské meno, alebo aj nickname či prezývka sa používa napr. pre fórum. Príklad: Elza, Maros22, FenixBlack,...</div>
 				<input type="text" name="username" class="step-1" placeholder="používateľské meno" required="required"/><div id="msg-username" class="error"></div>
 				<input type="text" name="email" class="step-1" placeholder="email" required="required"/><div id="msg-email" class="error"></div>
 				<input type="password" name="password" class="step-1" placeholder="heslo" required="required"/><div id="msg-password" class="error"></div>
@@ -53,7 +54,8 @@
 				<p>Výborne, ostáva už len jeden krok pre dokončenie registrácie a tým je vytvorenie tvojej postavy. Pri vytvárani mena sa kreativite medze nekladú, no dbaj na to aby pasovalo pre rasu, ktorú si si zvolil. </p>
 			</div>
 			<div class="fade-borders fade-background step-3">
-				<input type="text" name="charname" class="step-3" placeholder="meno postavy" required="required"/><div id="msg-charname" class="error"></div>
+				<input type="text" name="charname" id="charname" class="step-3" placeholder="meno postavy" required="required"/><div id="msg-charname" class="error"></div>
+				<div id="generator">G</div>
 				<input type="text" name="age" class="step-3" placeholder="vek postavy" required="required"/><div id="msg-age" class="error"></div>
 				<select name="gender">
 					<option value="male">Muž</option>
