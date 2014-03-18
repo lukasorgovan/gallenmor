@@ -50,8 +50,13 @@ class Api extends CI_Controller {
 	 * @return boolean true/false
 	 */
 	public function checkAvailibility($table, $entity) {
-		$data = $this->input->post(NULL, TRUE);
-		$response = $this->Api_model->checkAvailibility($data[$entity],  $table, $entity);
+		if ($entity == 'username' || $entity == 'name' || $entity == 'email') {
+			$data = $this->input->post(NULL, TRUE);
+			$response = $this->Api_model->checkAvailibility($data[$entity],  $table, $entity);
+		} 
+		else {
+			$response = 0;
+		}
 		echo $response;
 	}
 
