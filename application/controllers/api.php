@@ -49,9 +49,9 @@ class Api extends CI_Controller {
 	 * Checks if user name is availible in system or already taken.
 	 * @return boolean true/false
 	 */
-	public function checkUserNameAvailibility() {
+	public function checkAvailibility($table, $entity) {
 		$data = $this->input->post(NULL, TRUE);
-		$response = $this->Api_model->checkUserNameAvailibility($data['username']);
+		$response = $this->Api_model->checkAvailibility($data[$entity],  $table, $entity);
 		echo $response;
 	}
 

@@ -167,7 +167,7 @@ function checkField(fieldName, fieldValue, event, $element) {
 			var reg = /^[a-zľščťžýáíéúäňôö]{2,}[0-9]{0,2}$/i,
 			result = reg.test(fieldValue) ? (fieldValue.length <= 20 ? true : 'username') : 'username';
 			if (result === true && event.type == 'focusout') {
-				checkAvailibility('/api/checkUserNameAvailibility', {username: fieldValue}, fieldName);
+				checkAvailibility('/api/checkAvailibility/users/username', {username: fieldValue}, fieldName);
 			}
 			break;
 		case 'date':
@@ -184,6 +184,9 @@ function checkField(fieldName, fieldValue, event, $element) {
 		case 'email':
 			var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 			result = reg.test(fieldValue) ? true : 'email';
+			if (result === true) {
+				checkAvailibility('/api/checkAvailibility/users/email', {email: fieldValue}, fieldName);
+			}
 			break;
 		case 'race':
 			var allowedRaces = Object.keys(window.races),
@@ -199,9 +202,6 @@ function checkField(fieldName, fieldValue, event, $element) {
 			break;
 		case 'gender':
 			var result = (fieldValue === 'male' || fieldValue === 'female') ? true : 'gender';
-			break;
-		case 'bodytype':
-			var result = true;
 			break;
 		default:
 			result = 'unknown';
@@ -227,7 +227,7 @@ function checkAvailibility(requestURI, dataObject, fieldName) {
 		url: requestURI,
 		data: dataObject
 	}).done(function ( msg ) {
-		var result = (msg === 0) ? true : 'username_taken';
+		var result = (msg === 0) ? true : fieldName + '_taken';
 		return checkResult(fieldName, result);
 	});
 }

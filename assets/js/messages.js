@@ -9,7 +9,9 @@ window.systemMessages =  {
 		charname: 'Meno postavy musí mať 2 až 3 mená, môže obsahovať apostrof pred druhou alebo treťou časťou mena. Nesmie obsahovať číslice. Príklady: Olaf Himmelstorm, Aria la Fei, Melanie de\'Lacruse, ... Ak si nevieš meno vymyslieť, použi náš generátor :)',
 		age: 'Vek postavy musí byť číslo od 1 do 9999.',
 		gender: 'Pokúšaš sa hackovať našu stránku? Smola. Tvoja IP bola zaznamenaná.',
-		unknown: 'Niekde sa vyskytla chyba. Prosím kontaktuj nás na help@gallenmor.sk'
+		unknown: 'Niekde sa vyskytla chyba. Prosím kontaktuj nás na help@gallenmor.sk',
+		username_taken: 'Túto prezývkku už niekto má, zvoľ si, prosím, inú.',
+		email_taken: 'Túto emailovú adresu už niekto používa.'
 	},
 	general: {
 		unknown: 'Niekde sa vyskytla chyba. Prosím kontaktuj nás na help@gallenmor.sk'

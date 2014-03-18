@@ -49,9 +49,9 @@ Class Api_model extends CI_Model {
 		}
 	}
 
-	function checkUserNameAvailibility($name) {
-		$sql = "SELECT COUNT(*) AS pocet FROM users WHERE username = ?";
-		$query = $this->db->query($sql, array($name));
+	function checkAvailibility($data, $table, $column) {
+		$sql = "SELECT COUNT(*) AS pocet FROM {$table} WHERE {$column} = ?";
+		$query = $this->db->query($sql, array($data));
 		foreach ($query->result() as $row) {
 			return $row->pocet;
 		}
