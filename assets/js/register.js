@@ -20,9 +20,9 @@
 	});
 	$('body').one('initScroller', function() {
 		window.myScroll = new IScroll('#scroll-wrapper', {
-	   			scrollX: true, 
-	    		scrollY: false,
-	    		snap: 'div'
+			scrollX: true, 
+			scrollY: false,
+			snap: 'div'
 		});
 		myScroll.on('scrollEnd', function() {
 		
@@ -48,6 +48,9 @@
 	$("input[name='username']").on('focusin', function() {
 		$('.hint').show(400);
 	});
+	$("input[type='range']").on('change', function() {
+		$('#age-output').html(this.value);
+	});
 
 	/**
 	 * Bind steps buttons, do sanity field check on client side
@@ -60,12 +63,12 @@
 		if ($(this).data('back')) {
 			// rever
 			var showStep = $(this).data('step'),
-				hideStep = showStep + 1,
-				valid = true;
+				  hideStep = showStep + 1,
+				  valid = true;
 		}
 		else {
 			var showStep = $(this).data('step'),
-			 	hideStep = showStep - 1;
+			 	  hideStep = showStep - 1;
 		
 			$('input.step-'+hideStep).each(function() {
 				var $self = $(this);
@@ -92,6 +95,17 @@
 			}
 			else if (showStep === 3) {
 				getApiData('/api/generator/' + selectedRace, 'generatedNames', 'namesReady');
+				var $ageInput = $('input[type="range"]'),
+				    maxage = parseInt(window.races[selectedRace].maxage),
+				    minage = parseInt(window.races[selectedRace].minage),
+				    rangeVal = Math.round((maxage-minage) / 2 + minage);
+
+				$ageInput.attr({
+					min: minage,
+					max: maxage
+				});
+				$ageInput[0].value = rangeVal;
+				$('#age-output').html(rangeVal);
 			}
 		}
 
@@ -111,6 +125,7 @@
 			var max = window.generatedNames.length - 1;
 			$('#charname').val(window.generatedNames[generatorPosition].nickname);
 			generatorPosition = generatorPosition === max ? 0 : ++generatorPosition;
+			$('input[name="charname"]').trigger('focusin');
 		}
 	});
 	$('body').on('namesReady', function() {

@@ -37,7 +37,9 @@ Class Api_model extends CI_Model {
 					"name" => $row->name,
 					"description" => $row->description,
 					"racial" => $row->racial,
-					"history" => $row->history
+					"history" => $row->history,
+					"minage" => $row->minage,
+					"maxage" => $row->maxage
 					);
 			} 
 			return $data;

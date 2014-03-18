@@ -98,7 +98,7 @@ div.error {
 }
 #generator {
 	display: inline-block;
-	margin: 0 10px;
+	margin: 0 0 10px;
 	width: 26px;
 	height: 26px;
 	background-color: #065468;
@@ -116,6 +116,39 @@ div.error {
 }
 #generator:hover:after {
 	content: 'enerator';
+}
+.age-output {
+	display: block;
+	width: 20px;
+	height: 20px;
+	padding: 3px;
+	margin: 0 auto;
+	margin-bottom: -10px;
+	font-size: 20px;
+	font-weight: bold;
+	text-shadow: 0 0 20px #FF7A00;
+	color: #f6f3c9;
+} 
+input[type="range"] {
+	-webkit-appearance: none;
+	height: 6px;
+	cursor: pointer;
+	outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	border: 2px solid rgb(97, 71, 44);
+	background-color: #140f0b;
+	width: 15px;
+	height: 15px;
+	border-radius: 10px;
+}
+input[type="range"]::-moz-range-thumb {
+    border: 2px solid rgb(97, 71, 44);
+		background: #140f0b;
+}
+input[type="range"]::-moz-range-track {
+  width: 0;
 }
 .erb {
 	width: 245px;

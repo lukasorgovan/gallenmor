@@ -54,16 +54,18 @@
 				<p>Výborne, ostáva už len jeden krok pre dokončenie registrácie a tým je vytvorenie tvojej postavy. Pri vytvárani mena sa kreativite medze nekladú, no dbaj na to aby pasovalo pre rasu, ktorú si si zvolil. </p>
 			</div>
 			<div class="fade-borders fade-background step-3">
+				
 				<input type="text" name="charname" id="charname" class="step-3" placeholder="meno postavy" required="required"/><div id="msg-charname" class="error"></div>
 				<div id="generator">G</div>
-				<input type="text" name="age" class="step-3" placeholder="vek postavy" required="required"/><div id="msg-age" class="error"></div>
-				<select name="gender">
+				<select name="gender" class="step-3">
 					<option value="male">Muž</option>
 					<option value="female">Žena</option>
 				</select>
 				<div id="msg-gender" class="error"></div>
-				<label for="bodytype">Typ postavy</label>
-				N<input type="range" name="bodytype" min="1" max="10" />V
+				<label for="age" id="ageLabel" class='step-3'>Vek postavy</label>
+				<span id="age-output" class="age-output step-3 intro">35</span>
+				<input type="range" name="age" min="20" max="50" class="step-3" value="35"/>
+				<div id="msg-age" class="error"></div>
 				
 			</div>
 
