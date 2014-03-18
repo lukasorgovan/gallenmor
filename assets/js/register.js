@@ -195,6 +195,9 @@ function checkField(fieldName, fieldValue, event, $element) {
 		case 'charname': 
 			var reg = /^([a-zľščťžýáíéúäňôö']{2,} '?[a-zľščťžýáåäíéúňôö']{2,}( ?'?[a-zľščťžýäáäíéúňôö']{2,})?)$/i,
 			result = reg.test(fieldValue) ? true : 'charname';
+			if (result === true) {
+				checkAvailibility('/api/checkAvailibility/characters/name', {name: fieldValue}, fieldName);
+			}
 			break;
 		case 'age':
 			var reg = /^[0-9]{1,4}$/,
