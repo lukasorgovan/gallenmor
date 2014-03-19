@@ -10,7 +10,7 @@ window.systemMessages =  {
 		age: 'Vek postavy musí byť číslo od 1 do 9999.',
 		gender: 'Pokúšaš sa hackovať našu stránku? Smola. Tvoja IP bola zaznamenaná.',
 		unknown: 'Niekde sa vyskytla chyba. Prosím kontaktuj nás na help@gallenmor.sk',
-		username_taken: 'Túto prezývkku už niekto má, zvoľ si, prosím, inú.',
+		username_taken: 'Túto prezývku už niekto má. Vyber si, prosím, inú.',
 		email_taken: 'Túto emailovú adresu už niekto používa.'
 	},
 	general: {

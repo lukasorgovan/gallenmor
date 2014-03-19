@@ -107,6 +107,16 @@
 				$ageInput[0].value = rangeVal;
 				$('#age-output').html(rangeVal);
 			}
+			else if (showStep === 4) {
+				$.post('/api/register', $('form').serialize())
+				
+				.done(function() {
+
+				})
+				.fail(function() {
+
+				});
+			}
 		}
 
 	});

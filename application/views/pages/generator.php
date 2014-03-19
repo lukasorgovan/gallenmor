@@ -22,4 +22,4 @@
 	</div>
 </div>
 
-<?php $this->load->view('footer', array('scriptPath'=>'/assets/js/generator.js')); ?>
+<?php $this->load->view('footer', array('scriptPath' => array('/assets/js/generator.js'))); ?>

@@ -16,4 +16,4 @@
 	</div>
 </div>
 
-<?php $this->load->view('footer', array('scriptPath' => '/assets/js/register.js')); ?>
+<?php $this->load->view('footer', array('scriptPath' => array('/assets/js/register.js'))); ?>
