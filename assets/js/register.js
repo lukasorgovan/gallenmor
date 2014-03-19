@@ -110,11 +110,33 @@
 			else if (showStep === 4) {
 				$.post('/api/register', $('form').serialize())
 				
-				.done(function() {
+				.done(function(data) {
+					if (data === true) {
+						// Yup, uz je z teba rpg hrac
+						$('body').html('Yup, uz je z teba rpg hrac ');
 
+					}
+					else if (Array.isArray(data)) {
+						
+						var errorMsg = window.systemMessages.register['register_failure'];
+						
+						for (error in data) {
+							errorMsg += '<br/><br/>' + window.systemMessages.register[data[error]] ;
+						}
+						$('.step-4').hide();
+						$('.intro.step-1').addClass('error').html(errorMsg);
+						$('.step-1').show();	
+					}
+					else {
+						$('.step-4').hide();
+						$('.intro.step-1').addClass('error').html(window.systemMessages.register['system_failure']);
+						$('.step-1').show();
+					}
 				})
 				.fail(function() {
-
+					$('.step-4').hide();
+					$('.intro.step-1').addClass('error').html(window.systemMessages.register['system_failure']);
+					$('.step-1').show();
 				});
 			}
 		}
@@ -206,7 +228,7 @@ function checkField(fieldName, fieldValue, event, $element) {
 			var reg = /^([a-zľščťžýáíéúäňôö']{2,} '?[a-zľščťžýáåäíéúňôö']{2,}( ?'?[a-zľščťžýäáäíéúňôö']{2,})?)$/i,
 			result = reg.test(fieldValue) ? true : 'charname';
 			if (result === true) {
-				checkAvailibility('/api/checkAvailibility/characters/name', {name: fieldValue}, fieldName);
+				checkAvailibility('/api/checkAvailibility/characters/charname', {charname: fieldValue}, fieldName);
 			}
 			break;
 		case 'age':
@@ -214,7 +236,7 @@ function checkField(fieldName, fieldValue, event, $element) {
 			result = reg.test(fieldValue) ? true : 'age';
 			break;
 		case 'gender':
-			var result = (fieldValue === 'male' || fieldValue === 'female') ? true : 'gender';
+			var result = (fieldValue === 'muž' || fieldValue === 'žena') ? true : 'gender';
 			break;
 		default:
 			result = 'unknown';

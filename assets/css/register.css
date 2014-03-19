@@ -47,6 +47,7 @@ div.error {
 	font-size: 14px;
 	border-radius: 5px;
 	margin: 10px auto;
+	box-shadow: 0 0 20px rgb(73, 35, 36);
 }
 /**
  * Erbs - css for race erbs in registration

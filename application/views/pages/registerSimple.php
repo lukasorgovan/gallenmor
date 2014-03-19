@@ -58,8 +58,8 @@
 				<input type="text" name="charname" id="charname" class="step-3" placeholder="meno postavy" required="required"/><div id="msg-charname" class="error"></div>
 				<div id="generator">G</div>
 				<select name="gender" class="step-3">
-					<option value="male">Muž</option>
-					<option value="female">Žena</option>
+					<option value="muž">Muž</option>
+					<option value="žena">Žena</option>
 				</select>
 				<div id="msg-gender" class="error"></div>
 				<label for="age" id="ageLabel" class='step-3'>Vek postavy</label>
