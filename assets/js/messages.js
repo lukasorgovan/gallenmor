@@ -12,7 +12,7 @@ window.systemMessages =  {
 		unknown: 'Niekde sa vyskytla chyba. Prosím kontaktuj nás na help@gallenmor.sk, alebo skús prísť neskôr.',
 		username_taken: 'Túto prezývku už niekto má. Vyber si, prosím, inú.',
 		email_taken: 'Túto emailovú adresu už niekto používa.',
-		charname_taken: 'Toto meno je už obsadené. Skús porozmýšľaj nad iným. Keď si nevieš dať rady, použi generátor.',
+		charname_taken: 'Toto meno postavy je už obsadené. Skús porozmýšľaj nad iným. Keď si nevieš dať rady, použi generátor.',
 		system_failure: 'Registrácia sa nepodarila. Pravdepodobne máme preťažené servery alebo poruchu v systéme. Prosím kontaktuj nás na help@gallenmor.sk, alebo skús prísť neskôr.',
 		register_failure: 'Registrácia sa nepodarila. Prosím prejdi všetky kroky ešte raz a skontroluj chyby. POZOR: vek postavy sa prestavil na strednú hodnotu.'
 	},

@@ -127,6 +127,25 @@ input, select {
 .is-block {
 	display: block;
 }
+.loading {
+  background: rgb(56, 99, 86);
+	animation:loadingbg 2s linear infinite;
+	-webkit-animation:loadingbg 2s linear infinite; /* Safari and Chrome */
+	color: #fff;
+}
+@keyframes loadingbg 
+{
+	0% {background: rgb(56, 99, 86)}
+	50% {background: rgb(20,200,200)}
+	100% {background: rgb(56, 99, 86)}
+}
+@-webkit-keyframes loadingbg /* Safari and Chrome */
+{
+	0% {background: rgb(56, 99, 86)}
+	50% {background: rgb(20,200,200)}
+	100% {background: rgb(56, 99, 86)}
+}
+
 .shake {
 	animation: shake 0.5s;
 	-webkit-animation: shake 0.5s;

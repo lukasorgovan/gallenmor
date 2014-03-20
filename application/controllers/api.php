@@ -78,6 +78,10 @@ class Api extends CI_Controller {
 				show_404();
 		}
 	}
+	/**
+	 * Complex validation and registering user and his character
+	 * @return (true/array of errors) Returns true upon succes or array of error messages
+	 */
  	public function register() {
  		switch ($this->method) {
 			case 'post': 
@@ -144,16 +148,16 @@ class Api extends CI_Controller {
 					}
 					// When no error message yet, try to make db transaction to register user
 					if (count($error_messages) == 0) {
+						$ip = $this->input->ip_address();
 						// If transaction was unsucessfull, add error
-						/*if (! $this->Api_model->registerUserChar($data)) {
-							$error_messages[] = 'service_failed';
+						if (! $this->Api_model->registerUserChar($data, $ip)) {
+							$error_messages[] = 'system_failure';
 							echo json_encode($error_messages);
 						}
-						
 						// Everything is OK, let's party
-						else {*/
+						else {
 							echo 'true';
-						//}
+						}
 					}
 					else {
 						echo json_encode($error_messages);

@@ -1,13 +1,13 @@
 (function($) {
 	// Initial settings
-	var overlay = $('.overlay'),
+	var $overlay = $('.overlay'),
 	selectedRace = 'svetli-elfovia',
 	generatorPosition = 0,
 	valid = false;
 
 	// Set the height of overlay properly to screen size
-	if (overlay.length !== 0) {
-		overlay.css({
+	if ($overlay.length !== 0) {
+		$overlay.css({
 			height: $(document).height() + 'px',
 			backgroundColor: 'rgba(0,0,0,0.73)'
 		});
@@ -108,36 +108,49 @@
 				$('#age-output').html(rangeVal);
 			}
 			else if (showStep === 4) {
-				$.post('/api/register', $('form').serialize())
-				
-				.done(function(data) {
-					if (data === true) {
-						// Yup, uz je z teba rpg hrac
-						$('body').html('Yup, uz je z teba rpg hrac ');
-
-					}
-					else if (Array.isArray(data)) {
-						
-						var errorMsg = window.systemMessages.register['register_failure'];
-						
-						for (error in data) {
-							errorMsg += '<br/><br/>' + window.systemMessages.register[data[error]] ;
+				window.setTimeout(function() {
+					$.post('/api/register', $('form').serialize())
+					
+					.done(function(data) {
+						if (data === true) {
+							$lastIntro = $('.step-4.intro');
+							// Yup, registration completed succesfully
+							$lastIntro.removeClass('loading').addClass('success').html('Registrácia bola úspešná.');
+							window.setTimeout(function() {
+								$lastIntro.hide();
+								$overlay.css({backgroundColor: 'transparent'});
+							},1500);
 						}
-						$('.step-4').hide();
-						$('.intro.step-1').addClass('error').html(errorMsg);
-						$('.step-1').show();	
-					}
-					else {
+						else if (Array.isArray(data)) {
+							
+							var errorMsg = window.systemMessages.register['register_failure'];
+							
+							for (error in data) {
+								if (data === 'system_failure') {
+									errorMsg = window.systemMessages.register[data[error]];
+								}
+								else {
+									errorMsg += '<br/><br/>' + window.systemMessages.register[data[error]] ;
+								}
+							}
+							$('.step-4').hide();
+							$('.intro.step-3').addClass('error').html('Pozor! Vek sa prestavil na strednú hodnotu. Nezabudni si ho znovu nastaviť na hodnotu ktorú chceš.')
+							$('.intro.step-1').addClass('error').html(errorMsg);
+							$('.step-1').show();	
+						}
+						else {
+							$('.step-4').hide();
+							$('.intro.step-1').addClass('error').html(window.systemMessages.register['system_failure']);
+							$('.step-1').show();
+						}
+					})
+					.fail(function() {
 						$('.step-4').hide();
 						$('.intro.step-1').addClass('error').html(window.systemMessages.register['system_failure']);
 						$('.step-1').show();
-					}
-				})
-				.fail(function() {
-					$('.step-4').hide();
-					$('.intro.step-1').addClass('error').html(window.systemMessages.register['system_failure']);
-					$('.step-1').show();
-				});
+					});
+					
+				}, 2500);
 			}
 		}
 

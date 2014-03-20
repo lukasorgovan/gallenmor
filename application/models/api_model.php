@@ -8,7 +8,7 @@ Class Api_model extends CI_Model {
 			return $query->result();
 		}
 		else {
-			return false;
+			return FALSE;
 		}
 	}
 	function generator_post($race, $name) {
@@ -45,7 +45,7 @@ Class Api_model extends CI_Model {
 			return $data;
 		}
 		else {
-			return false;
+			return FALSE;
 		}
 	}
 
@@ -54,6 +54,24 @@ Class Api_model extends CI_Model {
 		$query = $this->db->query($sql, array($data));
 		foreach ($query->result() as $row) {
 			return $row->pocet;
+		}
+	}
+
+	function registerUserChar($data, $ip) {
+		if (is_array($data)) {
+			// Perform transaction to register user and his character
+				$sql_user = "INSERT INTO users (username, email, password, birthday, regip) VALUES(?, ?, ?, ?, ?)";
+				$sql_character = "INSERT INTO characters (race, origin_race, charname, gender, age, id_user) VALUES(?, ?, ?, ?, ?, ?)";
+			
+			$this->db->trans_start();
+				$this->db->query($sql_user, array($data['username'], $data['email'], $data['password'], $data['date'], $ip));
+				$this->db->query($sql_character, array($data['race'], $data['race'], $data['charname'], $data['gender'], $data['age'], $this->db->insert_id()));
+			$this->db->trans_complete();
+
+			return $this->db->trans_status();
+		}
+		else {
+			return FALSE;
 		}
 	}
 }
