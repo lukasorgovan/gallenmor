@@ -122,32 +122,38 @@
 							},1500);
 						}
 						else if (Array.isArray(data)) {
-							
-							var errorMsg = window.systemMessages.register['register_failure'];
-							
-							for (error in data) {
-								if (data === 'system_failure') {
-									errorMsg = window.systemMessages.register[data[error]];
-								}
-								else {
-									errorMsg += '<br/><br/>' + window.systemMessages.register[data[error]] ;
-								}
+							if (data.length === 1 && data[0] === 'charname_taken') {
+								$('.step-4').css('display', 'none');
+								$('.intro.step-3').addClass('error').html(window.systemMessages.register[data[0]]);
+								$('.step-3').css('display', 'block');
 							}
-							$('.step-4').hide();
-							$('.intro.step-3').addClass('error').html('Pozor! Vek sa prestavil na strednú hodnotu. Nezabudni si ho znovu nastaviť na hodnotu ktorú chceš.')
-							$('.intro.step-1').addClass('error').html(errorMsg);
-							$('.step-1').show();	
+							else {
+								var errorMsg = window.systemMessages.register['register_failure'];
+								
+								for (error in data) {
+									if (data === 'system_failure') {
+										errorMsg = window.systemMessages.register[data[error]];
+									}
+									else {
+										errorMsg += '<br/><br/>' + window.systemMessages.register[data[error]] ;
+									}
+								}
+								$('.step-4').css('display', 'none');
+								$('.intro.step-3').addClass('error').html('Pozor! Vek sa prestavil na strednú hodnotu. Nezabudni si ho znovu nastaviť na hodnotu ktorú chceš.')
+								$('.intro.step-1').addClass('error').html(errorMsg);
+								$('.step-1').css('display', 'block');	
+							}
 						}
 						else {
-							$('.step-4').hide();
+							$('.step-4').css('display', 'none');
 							$('.intro.step-1').addClass('error').html(window.systemMessages.register['system_failure']);
-							$('.step-1').show();
+							$('.step-1').css('display', 'block');
 						}
 					})
 					.fail(function() {
-						$('.step-4').hide();
+						$('.step-4').css('display', 'none');
 						$('.intro.step-1').addClass('error').html(window.systemMessages.register['system_failure']);
-						$('.step-1').show();
+						$('.step-1').css('display', 'block');
 					});
 					
 				}, 2500);
@@ -207,57 +213,57 @@ function getApiData(url, storeVar, triggerEvent) {
  * @return {bool}
  */
 function checkField(fieldName, fieldValue, event, $element) {
-	switch (fieldName) {
-		case 'username':
-			var reg = /^[a-zľščťžýáíéúäňôö]{2,}[0-9]{0,2}$/i,
-			result = reg.test(fieldValue) ? (fieldValue.length <= 20 ? true : 'username') : 'username';
-			if (result === true && event.type == 'focusout') {
-				checkAvailibility('/api/checkAvailibility/users/username', {username: fieldValue}, fieldName);
-			}
-			break;
-		case 'date':
-			var reg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
-			result = reg.test(fieldValue) ? true : 'date';
-			break;
-		case 'password':
-			var reg = /^[0-9a-z]{6,}$/i,
-			result = reg.test(fieldValue) ? true : 'password';
-			break;
-		case 'password-check':			
-			result = (fieldValue === $("input[name='password']").val()) ? true : 'passwordCheck';
-			break;
-		case 'email':
-			var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-			result = reg.test(fieldValue) ? true : 'email';
-			if (result === true) {
-				checkAvailibility('/api/checkAvailibility/users/email', {email: fieldValue}, fieldName);
-			}
-			break;
-		case 'race':
-			var allowedRaces = Object.keys(window.races),
-			result = allowedRaces.indexOf(fieldValue) !== -1 ? true : 'race';
-			break;
-		case 'charname': 
-			var reg = /^([a-zľščťžýáíéúäňôö']{2,} '?[a-zľščťžýáåäíéúňôö']{2,}( ?'?[a-zľščťžýäáäíéúňôö']{2,})?)$/i,
-			result = reg.test(fieldValue) ? true : 'charname';
-			if (result === true) {
-				checkAvailibility('/api/checkAvailibility/characters/charname', {charname: fieldValue}, fieldName);
-			}
-			break;
-		case 'age':
-			var reg = /^[0-9]{1,4}$/,
-			result = reg.test(fieldValue) ? true : 'age';
-			break;
-		case 'gender':
-			var result = (fieldValue === 'muž' || fieldValue === 'žena') ? true : 'gender';
-			break;
-		default:
-			result = 'unknown';
-	}
 	if (event.type == 'focusin') {
 		$element.removeClass('shake error');
 	}
 	else {
+		switch (fieldName) {
+			case 'username':
+				var reg = /^[a-zľščťžýáíéúäňôö]{2,}[0-9]{0,2}$/i,
+				result = reg.test(fieldValue) ? (fieldValue.length <= 20 ? true : 'username') : 'username';
+				if (result === true && event.type == 'focusout') {
+					checkAvailibility('/api/checkAvailibility/users/username', {username: fieldValue}, fieldName);
+				}
+				break;
+			case 'date':
+				var reg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
+				result = reg.test(fieldValue) ? true : 'date';
+				break;
+			case 'password':
+				var reg = /^[0-9a-z]{6,}$/i,
+				result = reg.test(fieldValue) ? true : 'password';
+				break;
+			case 'password-check':			
+				result = (fieldValue === $("input[name='password']").val()) ? true : 'passwordCheck';
+				break;
+			case 'email':
+				var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+				result = reg.test(fieldValue) ? true : 'email';
+				if (result === true) {
+					checkAvailibility('/api/checkAvailibility/users/email', {email: fieldValue}, fieldName);
+				}
+				break;
+			case 'race':
+				var allowedRaces = Object.keys(window.races),
+				result = allowedRaces.indexOf(fieldValue) !== -1 ? true : 'race';
+				break;
+			case 'charname': 
+				var reg = /^([a-zľščťžýáíéúäňôö']{2,} '?[a-zľščťžýáåäíéúňôö']{2,}( ?'?[a-zľščťžýäáäíéúňôö']{2,})?)$/i,
+				result = reg.test(fieldValue) ? true : 'charname';
+				if (result === true) {
+					checkAvailibility('/api/checkAvailibility/characters/charname', {charname: fieldValue}, fieldName);
+				}
+				break;
+			case 'age':
+				var reg = /^[0-9]{1,4}$/,
+				result = reg.test(fieldValue) ? true : 'age';
+				break;
+			case 'gender':
+				var result = (fieldValue === 'muž' || fieldValue === 'žena') ? true : 'gender';
+				break;
+			default:
+				result = 'unknown';
+		}
 		return checkResult(fieldName, result);
 	}
 }

@@ -57,14 +57,14 @@ Class Api_model extends CI_Model {
 		}
 	}
 
-	function registerUserChar($data, $ip) {
+	function registerUserChar($data, $ip, $salt) {
 		if (is_array($data)) {
 			// Perform transaction to register user and his character
-				$sql_user = "INSERT INTO users (username, email, password, birthday, regip) VALUES(?, ?, ?, ?, ?)";
+				$sql_user = "INSERT INTO users (username, email, password, birthday, regip, salt) VALUES(?, ?, ?, ?, ?, ?)";
 				$sql_character = "INSERT INTO characters (race, origin_race, charname, gender, age, id_user) VALUES(?, ?, ?, ?, ?, ?)";
-			
+				$password = sha1($salt . $data['password'] . $salt);
 			$this->db->trans_start();
-				$this->db->query($sql_user, array($data['username'], $data['email'], $data['password'], $data['date'], $ip));
+				$this->db->query($sql_user, array($data['username'], $data['email'], $password, $data['date'], $ip, $salt));
 				$this->db->query($sql_character, array($data['race'], $data['race'], $data['charname'], $data['gender'], $data['age'], $this->db->insert_id()));
 			$this->db->trans_complete();
 

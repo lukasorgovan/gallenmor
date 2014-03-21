@@ -50,12 +50,12 @@ class Api extends CI_Controller {
 	 * @return boolean true/false
 	 */
 	public function checkAvailibility($table, $entity) {
-		if ($entity == 'username' || $entity == 'name' || $entity == 'email') {
+		if ($entity == 'username' || $entity == 'charname' || $entity == 'email') {
 			$data = $this->input->post(NULL, TRUE);
 			$response = $this->Api_model->checkAvailibility($data[$entity],  $table, $entity);
 		} 
 		else {
-			$response = 0;
+			$response = 1;
 		}
 		echo $response;
 	}
@@ -148,9 +148,12 @@ class Api extends CI_Controller {
 					}
 					// When no error message yet, try to make db transaction to register user
 					if (count($error_messages) == 0) {
+						$this->load->helper('string');
+						$salt = random_string('alnum', 5);
 						$ip = $this->input->ip_address();
 						// If transaction was unsucessfull, add error
-						if (! $this->Api_model->registerUserChar($data, $ip)) {
+						// 
+						if (! $this->Api_model->registerUserChar($data, $ip, $salt)) {
 							$error_messages[] = 'system_failure';
 							echo json_encode($error_messages);
 						}
