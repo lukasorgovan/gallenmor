@@ -1,5 +1,9 @@
 (function($) {
+
 	// Initial settings
+	$.ajaxSetup({
+  	timeout: 6000
+	});
 	var $overlay = $('.overlay'),
 	selectedRace = 'svetli-elfovia',
 	generatorPosition = 0,
