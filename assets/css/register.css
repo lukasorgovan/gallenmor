@@ -97,6 +97,13 @@ div.error {
 	box-shadow: 0 0 20px rgb(12, 158, 100);
 	display: none;
 }
+#video {
+	margin: 0 auto;
+	display: none;
+	width: 400px;
+	height: 300px;
+	background-color: #000;
+}
 #generator {
 	display: inline-block;
 	margin: 0 0 10px;

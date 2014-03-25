@@ -123,6 +123,7 @@
 							window.setTimeout(function() {
 								$lastIntro.hide();
 								$overlay.css({backgroundColor: 'transparent'});
+								$('#video').css('display', 'block');
 							},1500);
 						}
 						else if (Array.isArray(data)) {

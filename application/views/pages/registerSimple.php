@@ -71,7 +71,9 @@
 			<div class="intro step-4 loading">
 				<p>Prebieha registrácia...Vietor ustáva, koruny starých javorov navôkol jemne šumia a padajúce lístie vo vzduchu spomaľuje až kým listy neostanú nehybne vysieť vo vzduchu. Máš pocit, že zastal čas.</p>
 			</div>
-
+			<div id="video">
+				<p>Tu bude video a po prehrati sa zobrazi login formular</p>
+			</div>
 			<a href="#" data-step="4" class="step-3 fade-borders border-button fade-background">Dokončiť registráciu</a>
 			<a href="#" data-step="2" data-back="true" class="step-3 back">Späť</a>
 		</div>
