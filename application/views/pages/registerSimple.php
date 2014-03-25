@@ -1,5 +1,4 @@
 <?php $this->load->view('header', array('cssPath' => '/assets/css/register.css')); ?>
-
 <div id="wrapper" class="margin-auto">
 	<header>
 		<ul id="topmenu" class="margin-auto">

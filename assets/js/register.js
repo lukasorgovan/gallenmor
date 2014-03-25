@@ -124,6 +124,9 @@
 								$lastIntro.hide();
 								$overlay.css({backgroundColor: 'transparent'});
 								$('#video').css('display', 'block');
+								window.setTimeout(function() {
+									window.location.href = '/profile/characters';
+								}, 1000);
 							},1500);
 						}
 						else if (Array.isArray(data)) {

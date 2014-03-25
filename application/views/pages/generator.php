@@ -8,8 +8,8 @@
 		<form action="/api/generator" method="POST" id="generator">
 			<label for="race">Rasa:</label>
 			<select name="race" id="race">
-				<option value="svetli_elfovia">Svetlí elfovia</option>
-				<option value="temni_elfovia">Temní elfovia</option>
+				<option value="svetli-elfovia">Svetlí elfovia</option>
+				<option value="temni-elfovia">Temní elfovia</option>
 				<option value="severania">Severania</option>
 				<option value="juzania">Južania</option>
 				<option value="cigani">Cigáni</option>

@@ -1,4 +1,5 @@
 $('#generator').on('submit', function(event) {
+	$('#msg').hide();
 	event.preventDefault();
 	var formName = $('#name').val(),
 	formRace = $('#race').val();
@@ -11,7 +12,8 @@ $('#generator').on('submit', function(event) {
 				data: {name: formName, race: formRace}
 			}).done(function ( msg ) {
 
-				$('#msg').removeClass('errorMessage').addClass('successMessage').html(msg);
+				$('#msg').show().removeClass('errorMessage').addClass('successMessage').html(msg);
+
 			}).fail(function () {
 				$('#msg').removeClass('successMessage').html('Pridávanie nových mien dočasne nefunguje. Skús to neskôr.');
 			});	

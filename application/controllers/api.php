@@ -8,6 +8,7 @@ class Api extends CI_Controller {
 		$this->load->model('Api_model');
 		$this->output->set_header('Content-Type: application/json; charset=utf-8');
 		$this->method = $this->_detect_method();
+		$this->load->library('session');
 	}
 
 	public function index($page = 'home') {
@@ -151,15 +152,22 @@ class Api extends CI_Controller {
 						$this->load->helper('string');
 						$salt = random_string('alnum', 5);
 						$ip = $this->input->ip_address();
+
 						// If transaction was unsucessfull, add error
-						// 
 						if (! $this->Api_model->registerUserChar($data, $ip, $salt)) {
 							$error_messages[] = 'system_failure';
 							echo json_encode($error_messages);
 						}
 						// Everything is OK, let's party
 						else {
+							$this->session->set_userdata(array(
+									'username' => $data['username'],
+									'charname' => $data['charname'],
+									'race' => $data['race'],
+									'logged' => TRUE
+							));
 							echo 'true';
+
 						}
 					}
 					else {
