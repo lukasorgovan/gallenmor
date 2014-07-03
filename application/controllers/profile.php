@@ -4,13 +4,19 @@ class Profile extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library('session');
+		$this->load->helper('url');
 	}
 	public function characters() {
 		if ($this->session->userdata('username')) {
-			echo '<h1>Hidden section: debug data info</h1>
-			<pre>';
-			print_r($this->session->all_userdata());
-			echo '</pre>';
+			$this->load->view('pages/registerSimple', $data);
+		}
+		else if ($this->session->userdata('user')) {
+			echo "Vitaj uzivatel";
+			echo "Load all information from database, populate javascript framework, Behave as single app.";
+			
+		}
+		else {
+			redirect(base_url() . 'login', 'location');
 		}
 	}
 }

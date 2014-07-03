@@ -48,7 +48,6 @@ Class Api_model extends CI_Model {
 			return FALSE;
 		}
 	}
-
 	function checkAvailibility($data, $table, $column) {
 		$sql = "SELECT COUNT(*) AS pocet FROM {$table} WHERE {$column} = ?";
 		$query = $this->db->query($sql, array($data));
@@ -71,6 +70,35 @@ Class Api_model extends CI_Model {
 			$this->db->trans_complete();
 
 			return $this->db->trans_status();
+		}
+		else {
+			return FALSE;
+		}
+	}
+	
+	function login($login, $password) {
+		$sql = "SELECT * FROM users WHERE email = ?";
+		$query = $this->db->query($sql, array($login));
+		if ($query->num_rows() == 1) {
+			foreach ($query->result() as $row) {
+				// Check if password matches
+				if (sha1($row->salt . $password . $row->salt) == $row->password) {
+					$data['user'] = array(
+					"id" => $row->id,
+					"username" => $row->username,
+					"gems" => $row->gems,
+					"allowed_to_play" => $row->allowed_to_play,
+					"birthday" => $row->birthday,
+					"forum_rank" => $row->forum_rank,
+					"avatar" => $row->avatar,
+					"banned" => $row->banned
+					);
+					return $data;
+				}
+				else {
+					return FALSE;
+				}
+			}
 		}
 		else {
 			return FALSE;
