@@ -5,7 +5,7 @@
 		<header>
 			<h1>Zápis do knihy mien</h1>
 		</header>
-		<form action="/api/generator" method="POST" id="generator">
+        <form action="<?= site_url('api/generator')?>" method="POST" id="generator">
 			<label for="race">Rasa:</label>
 			<select name="race" id="race">
 				<option value="svetli-elfovia">Svetlí elfovia</option>

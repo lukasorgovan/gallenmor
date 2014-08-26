@@ -9,7 +9,7 @@
 
 <div id="container">
 	<h1><?php echo $tsitle; ?></h1>
-
+</div>
 
 </body>
 </html>
