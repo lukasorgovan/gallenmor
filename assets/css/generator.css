@@ -22,7 +22,7 @@ input[type="submit"] {
 	background-image: -webkit-linear-gradient(bottom, rgb(19,41,40) 15%, rgb(45,76,77) 100%);
 	background-image: -ms-linear-gradient(bottom, rgb(19,41,40) 15%, rgb(45,76,77) 100%);
 	background-image: linear-gradient(bottom, rgb(19,41,40) 15%, rgb(45,76,77) 100%);
-
+    cursor: pointer;
 }
 input[type="submit"]:hover {
 	background-image: -webkit-linear-gradient(bottom, rgb(19,41,40) 15%, rgb(0,50,50) 79%);
