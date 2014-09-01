@@ -6,9 +6,9 @@ class Api extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('Api_model');
+		$this->load->model('User');
 		$this->output->set_header('Content-Type: application/json; charset=utf-8');
 		$this->method = $this->_detect_method();
-		$this->load->library('session');
 	}
 
 	public function index($page = 'home') {
@@ -53,7 +53,7 @@ class Api extends CI_Controller {
 	public function checkAvailibility($table, $entity) {
 		if ($entity == 'username' || $entity == 'charname' || $entity == 'email') {
 			$data = $this->input->post(NULL, TRUE);
-			$response = $this->Api_model->checkAvailibility($data[$entity],  $table, $entity);
+			$response = $this->User->checkAvailibility($data[$entity],  $table, $entity);
 		} 
 		else {
 			$response = 1;
@@ -100,7 +100,7 @@ class Api extends CI_Controller {
 
 							case 'username':
 								if (preg_match("/^[a-zľščťžýáíéúäňôö]{2,}[0-9]{0,2}$/i", $value)) {
-									$res = $this->Api_model->checkAvailibility($value, 'users', $key);
+									$res = $this->User->checkAvailibility($value, 'users', $key);
 									
 
 									if ($res != '0') {
@@ -111,7 +111,7 @@ class Api extends CI_Controller {
 								break;
 							case 'email':
 								if (preg_match("/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/", $value)) {
-									if ($this->Api_model->checkAvailibility($value, 'users', $key) != 0) {
+									if ($this->User->checkAvailibility($value, 'users', $key) != 0) {
 										$error_messages[] = 'email_taken';	
 									}
 								}
@@ -119,7 +119,7 @@ class Api extends CI_Controller {
 								break;
 							case 'charname':
 								if (preg_match("/^([a-zľščťžýáíéúäňôö']{2,} '?[a-zľščťžýáåäíéúňôö']{2,}( ?'?[a-zľščťžýäáäíéúňôö']{2,})?)$/i", $value)) {
-									if ($this->Api_model->checkAvailibility($value, 'characters', $key) != 0) {
+									if ($this->User->checkAvailibility($value, 'characters', $key) != 0) {
 										$error_messages[] = 'charname_taken';	
 									}
 								}
@@ -154,7 +154,7 @@ class Api extends CI_Controller {
 						$ip = $this->input->ip_address();
 
 						// If transaction was unsucessfull, add error
-						if (! $this->Api_model->registerUserChar($data, $ip, $salt)) {
+						if (! $this->User->registerUserChar($data, $ip, $salt)) {
 							$error_messages[] = 'system_failure';
 							echo json_encode($error_messages);
 						}
