@@ -17,7 +17,7 @@ class Login extends CI_Controller {
             $userLoggedIn = $this->User->login($login, $password);
 
             if ($userLoggedIn) {
-                redirect(base_url('profile'), 'location');
+                redirect(base_url('profile/characters'), 'location');
             } else {
                 $data['error'] = 'login';
                 $this->load->view('pages/login', $data);

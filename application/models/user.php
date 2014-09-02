@@ -62,6 +62,7 @@ class User extends CI_Model {
                     $this->session->set_userdata(array(
                         "id" => $row->id,
                         "username" => $row->username,
+                        "email" => $row->email,
                         "gems" => $row->gems,
                         "allowed_to_play" => $row->allowed_to_play,
                         "birthday" => $row->birthday,
@@ -78,6 +79,61 @@ class User extends CI_Model {
         } else {
             return FALSE;
         }
+    }
+
+    /**
+     * Get all characters for specified user
+     * 
+     * @param type $user_id
+     * @return type
+     */
+    function getUsersCharacters($user_id) {
+        $sql = "SELECT * FROM characters WHERE id_user = ?";
+        $query = $this->db->query($sql, array($user_id));
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return array();
+    }
+
+    /**
+     * Get row from table for specified user
+     * 
+     * @param type $user_id
+     * @return type
+     */
+    public function getUserData($user_id) {
+        $sql = "SELECT * FROM users WHERE id = ?";
+        $query = $this->db->query($sql, array($user_id));
+
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        }
+        return array();
+    }
+
+    /**
+     * Update account settings (email, password)
+     * 
+     * @param type $user_id
+     * @param type $email
+     * @param type $password
+     * @param type $salt
+     */
+    public function updateAccountSetting($user_id, $email, $password, $salt) {
+        $sql_email = "UPDATE users SET email = ? WHERE id = ?";
+        $sql_pass = "UPDATE users SET pass = ? WHERE id = ?";
+
+        $this->db->trans_start();
+        $this->db->query($sql_email, array($email, $user_id));
+        if ($password != "") {
+            $password = sha1($salt . $password . $salt);
+            $this->db->query($sql_pass, array($password, $user_id));
+        }
+        $this->db->trans_complete();
+        
+        return $this->db->trans_status();
     }
 
 }
