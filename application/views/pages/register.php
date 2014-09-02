@@ -1,8 +1,8 @@
-<?php $this->load->view('header', array('cssPath' => '/assets/css/register.css')); ?>
+<?php $this->load->view('layout/index/header', array('cssPath' => '/assets/css/register.css')); ?>
 
 <div id="wrapper" class="margin-auto">
     <header>
-        <?php $this->load->view('menus/index_menu') ?>
+        <?php $this->load->view('layout/index/menu') ?>
     </header>
     <div class="overlay">
         <div id="content" class="margin-auto">
@@ -12,4 +12,4 @@
     </div>
 </div>
 
-<?php $this->load->view('footer', array('scriptPath' => array('/assets/js/register.js'))); ?>
+<?php $this->load->view('layout/index/footer', array('scriptPath' => array('/assets/js/register.js'))); ?>

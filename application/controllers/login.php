@@ -17,7 +17,7 @@ class Login extends CI_Controller {
             $userLoggedIn = $this->User->login($login, $password);
 
             if ($userLoggedIn) {
-                redirect(base_url() . 'profile/characters', 'location');
+                redirect(base_url('profile'), 'location');
             } else {
                 $data['error'] = 'login';
                 $this->load->view('pages/login', $data);
@@ -28,8 +28,11 @@ class Login extends CI_Controller {
         }
     }
 
+    /**
+     * Logout current user
+     */
     public function logout() {
-        $this->session->set_userdata(FALSE);
+        $this->session->set_userdata(array("login_state" => FALSE));
         $this->session->sess_destroy();
         redirect(base_url());
     }

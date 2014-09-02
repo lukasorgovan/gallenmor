@@ -1,7 +1,7 @@
-<?php $this->load->view('header', array('cssPath' => '/assets/css/register.css')); ?>
+<?php $this->load->view('layout/index/header', array('cssPath' => '/assets/css/register.css')); ?>
 <div id="wrapper" class="margin-auto">
     <header>
-        <?php $this->load->view('menus/index_menu') ?>
+        <?php $this->load->view('layout/index/menu') ?>
     </header>
     <div class="overlay">
         <div id="content" class="margin-auto">
@@ -79,4 +79,4 @@
     <p>This is a default modal in all its glory, but any of the styles here can easily be changed in the CSS.</p>
     <a class="close-reveal-modal">&#215;</a>
 </div>
-<?php $this->load->view('footer', array('scriptPath' => array('/assets/js/register.js', '/assets/js/messages.js'))); ?>
+<?php $this->load->view('layout/index/footer', array('scriptPath' => array('/assets/js/register.js', '/assets/js/messages.js'))); ?>
