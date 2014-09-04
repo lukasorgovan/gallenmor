@@ -121,18 +121,22 @@ class User extends CI_Model {
      * @param type $password
      * @param type $salt
      */
-    public function updateAccountSetting($user_id, $email, $password, $salt) {
+    public function updateAccountSetting($user_id, $email, $password) {
+        $data = $this->getUserData($user_id);
+        $salt = $data->salt;
+
         $sql_email = "UPDATE users SET email = ? WHERE id = ?";
-        $sql_pass = "UPDATE users SET pass = ? WHERE id = ?";
+        $sql_pass = "UPDATE users SET password = ? WHERE id = ?";
 
         $this->db->trans_start();
         $this->db->query($sql_email, array($email, $user_id));
-        if ($password != "") {
+
+        if ($password != '') {
             $password = sha1($salt . $password . $salt);
             $this->db->query($sql_pass, array($password, $user_id));
         }
         $this->db->trans_complete();
-        
+
         return $this->db->trans_status();
     }
 
