@@ -23,6 +23,8 @@
         echo '<br/>';
     }
     ?>
+    <?= anchor('profile/editCharacters', 'Spravovať postavy'); ?>
 </div>
+
 
 <?php $this->load->view('layout/game/footer'); ?>

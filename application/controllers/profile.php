@@ -18,7 +18,8 @@ class Profile extends LoggedController {
      * character administration (create, delete, etc.)
      */
     public function characters() {
-        $data['characters'] = $this->User->getUsersCharacters($this->session->userdata('id'));
+        $this->load->model('Character');
+        $data['characters'] = $this->Character->getCharactersForUser($this->session->userdata('id'));
 
         $this->load->view('profile/view', $data);
     }
@@ -109,6 +110,45 @@ class Profile extends LoggedController {
             }
         }
         return TRUE;
+    }
+
+    /**
+     * 
+     */
+    public function editCharacters() {
+        $this->load->model('Character');
+        $data['characters'] = $this->Character->getCharactersForUser($this->session->userdata('id'));
+
+        $this->load->view('profile/edit_characters', $data);
+    }
+
+    public function delCharacter() {
+        $this->load->model('Character');
+        $id = (int) trim($this->input->post('delete_character'));
+
+        if ($this->Character->deleteCharacter($id)) {
+            $this->session->set_flashdata('success', 'Postava bola zmazaná.');
+            $this->session->set_flashdata('error', $id);
+        } else {
+            $this->session->set_flashdata('error', 'Postavu sa nepodarilo zmazať. Skúste to opäť neskôr.');
+        }
+        redirect('profile/editCharacters'); // prevent resubmiting the form
+    }
+
+    public function addCharacter() {
+        $this->load->model('Character');
+
+        $race = trim($this->input->post('email'));
+        $charname = trim($this->input->post('charname'));
+        $gender = trim($this->input->post('gender'));
+        $age = trim($this->input->post('email'));
+
+        if ($this->Character->addCharacter($race, $charname, $gender, $age)) {
+            $this->session->set_flashdata('success', 'Postava bola vytvorená.');
+        } else {
+            $this->session->set_flashdata('error', 'Postavu sa nepodarilo vytvoriť. Skúste to opäť neskôr.');
+        }
+        redirect('profile/editCharacters'); // prevent resubmiting the form
     }
 
     function setCharacter($id) {

@@ -82,22 +82,6 @@ class User extends CI_Model {
     }
 
     /**
-     * Get all characters for specified user
-     * 
-     * @param type $user_id
-     * @return type
-     */
-    function getUsersCharacters($user_id) {
-        $sql = "SELECT * FROM characters WHERE id_user = ?";
-        $query = $this->db->query($sql, array($user_id));
-
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        }
-        return array();
-    }
-
-    /**
      * Get row from table for specified user
      * 
      * @param type $user_id
