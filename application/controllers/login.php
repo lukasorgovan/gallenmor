@@ -17,6 +17,12 @@ class Login extends CI_Controller {
             $userLoggedIn = $this->User->login($login, $password);
 
             if ($userLoggedIn) {
+                /** 
+                 * To-Do: If user has more than 1 character go to 
+                 * profile/characters, else go to profile/index or his last
+                 * location
+                 */
+                
                 redirect(base_url('profile/characters'), 'location');
             } else {
                 $data['error'] = 'login';

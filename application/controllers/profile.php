@@ -8,6 +8,7 @@ class Profile extends LoggedController {
     }
 
     public function index($id) {
+        // To-Do: if id is not set display current characters profile
         echo "Showing character's profile with id $id";
     }
 
@@ -123,6 +124,8 @@ class Profile extends LoggedController {
     }
 
     public function delCharacter() {
+         /* To-Do: Delete only if user has more than one character */
+        
         $this->load->model('Character');
         $id = (int) trim($this->input->post('delete_character'));
 
