@@ -73,7 +73,7 @@ class User extends CI_Model {
                     ));
                     return TRUE;
                 } else {
-                    return T;
+                    return FALSE;
                 }
             }
         } else {
