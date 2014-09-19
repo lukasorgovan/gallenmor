@@ -124,4 +124,25 @@ class User extends CI_Model {
         return $this->db->trans_status();
     }
 
+    /**
+     * Returns list of all users
+     * 
+     * @param boolean $exclude_yourself Flag to exclude logged user from the list
+     * @return type array of all users [id, username]
+     */
+    public function getAllUsers($exclude_yourself = false) {
+        if ($exclude_yourself) {
+            $sql = "SELECT id, username FROM users WHERE id <> ? ORDER BY username ASC";
+            $query = $this->db->query($sql, array($this->session->userdata('id')));
+        } else {
+            $sql = "SELECT id, username FROM users ORDER BY username ASC";
+            $query = $this->db->query($sql);
+        }
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return array();
+    }
+
 }
