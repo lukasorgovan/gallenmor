@@ -24,7 +24,7 @@ class Clubhouses extends CI_Controller {
         $data['race'] = $race;
 
         // get clubhouse posts
-        $data['messages'] = $this->ClubhousePost->getClubhousePosts($race);
+        $data['posts'] = $this->ClubhousePost->getClubhousePosts($race);
 
         $this->load->view('clubhouses/race', $data);
     }
@@ -46,7 +46,7 @@ class Clubhouses extends CI_Controller {
             }
         }
 
-        redirect('profile/race/' . $place); // redirect to the clubhouse
+        redirect('clubhouses/race/' . $place); // redirect to the clubhouse
     }
 
     /**
@@ -66,7 +66,7 @@ class Clubhouses extends CI_Controller {
             }
         }
 
-        redirect('profile/race/' . $place); // redirect to the clubhouse
+        redirect('clubhouses/race/' . $place); // redirect to the clubhouse
     }
 
     /**
@@ -87,7 +87,7 @@ class Clubhouses extends CI_Controller {
             }
         }
         
-        redirect('profile/race/' . $place); // redirect to the clubhouse
+        redirect('clubhouses/race/' . $place); // redirect to the clubhouse
     }
 
 }
