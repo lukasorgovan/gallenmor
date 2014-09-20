@@ -81,21 +81,35 @@ class Clubhouses extends CI_Controller {
     public function updatePost() {
         $message = trim($this->input->post('message'));
         $id = trim($this->input->post('id'));
-        $place = trim($this->input->post('id'));
-
+        $place = trim($this->input->post('place'));
+        
         if (!$this->_isAuthorizedToManage($id)) {
             $this->session->set_flashdata('error', 'Nemáš oprávnenie upravovať tento príspevok.');
-        } else if ($message || $message == '') {
+        } else if (!$message || $message == '') {
             $this->session->set_flashdata('error', 'Nezadal si obsah správy.');
         } else {
-            if ($this->ClubhousePost->createPost($id, $message)) {
-                $this->session->set_flashdata('success', 'Príspevok bol pridaný.');
+            if ($this->ClubhousePost->updatePost($id, $message)) {
+                $this->session->set_flashdata('success', 'Príspevok bol aktualizovaný.');
             } else {
-                $this->session->set_flashdata('error', 'Príspevok sa nepodarilo pridať. Skúste to neskôr.');
+                $this->session->set_flashdata('error', 'Príspevok sa nepodarilo aktualizovať. Skúste to neskôr.');
             }
         }
 
         redirect('clubhouses/race/' . $place); // redirect to the clubhouse
+    }
+
+    /**
+     * Display edit form to edit a post
+     * 
+     * @param int $id Id of the post to be edited
+     */
+    public function edit($id) {
+        if (!$this->_isAuthorizedToManage($id)) {
+            $data['error'] = 'Nemáš oprávnenie upravovať tento príspevok.';
+        } else {
+            $data['post'] = $this->ClubhousePost->getPost($id);
+        }
+        $this->load->view('clubhouses/edit', $data);
     }
 
     /**

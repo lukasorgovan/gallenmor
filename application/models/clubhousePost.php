@@ -61,7 +61,7 @@ class ClubhousePost extends CI_Model {
     public function getPosts($place, $page = 1, $per_page = 15) {
         $offset = ($page - 1) * $per_page;
 
-        $sql = "SELECT * FROM clubhouse_posts c
+        $sql = "SELECT c.*, u.username, u.avatar FROM clubhouse_posts c
             JOIN users u ON c.user_id = u.id
             WHERE place = ?
             ORDER BY created DESC
