@@ -36,7 +36,7 @@ class Clubhouses extends CI_Controller {
     /**
      * Adds new post to a clubhouse
      */
-    public function sendMessage() {
+    public function addPost() {
         $message = trim($this->input->post('message'));
         $place = trim($this->input->post('place'));
 
@@ -56,7 +56,7 @@ class Clubhouses extends CI_Controller {
     /**
      * Deletes a post from a clubhouse
      */
-    public function deleteMessage() {
+    public function deletePost() {
         $id = trim($this->input->post('id'));
         $place = trim($this->input->post('place'));
 
@@ -78,7 +78,7 @@ class Clubhouses extends CI_Controller {
     /**
      * Updates a post in a clubhouse
      */
-    public function updateMessage() {
+    public function updatePost() {
         $message = trim($this->input->post('message'));
         $id = trim($this->input->post('id'));
         $place = trim($this->input->post('id'));

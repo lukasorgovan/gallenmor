@@ -25,7 +25,7 @@
         <button>Pridaj príspevok</button>
 
 
-        <form action="<?= site_url('clubhouses/sendMessage') ?>" method="POST" id="new_message_form">
+        <form action="<?= site_url('clubhouses/addPost') ?>" method="POST" id="new_message_form">
             <textarea name="message" cols="50" rows="10"></textarea>
             <input type="hidden" name="place" value="<?= $race ?>" />
             <input type="submit" value="Odoslať" />
