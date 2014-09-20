@@ -58,7 +58,7 @@ class ClubhousePost extends CI_Model {
      * @param int $per_page How many posts should be shown per page
      * @return array Array of posts
      */
-    public function getClubhousePosts($place, $page = 1, $per_page = 15) {
+    public function getPosts($place, $page = 1, $per_page = 15) {
         $offset = ($page - 1) * $per_page;
 
         $sql = "SELECT * FROM clubhouse_posts c
@@ -70,6 +70,16 @@ class ClubhousePost extends CI_Model {
 
         if ($query->num_rows() > 0) {
             return $query->result_array();
+        }
+        return array();
+    }
+
+    public function getPost($id) {
+        $sql = "SELECT * FROM clubhouse_posts WHERE id = ?";
+        $query = $this->db->query($sql, array($id));
+
+        if ($query->num_rows() > 0) {
+            return $query->row_array();
         }
         return array();
     }

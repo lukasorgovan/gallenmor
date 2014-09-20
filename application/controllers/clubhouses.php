@@ -18,13 +18,17 @@ class Clubhouses extends CI_Controller {
     /**
      * Displays specified clubhouse
      * 
-     * @param string $race
+     * @param string $place Clubhouse identification string
      */
-    public function race($race) {
-        $data['race'] = $race;
+    public function race($place) {
+        $data['race'] = $place;
 
-        // get clubhouse posts
-        $data['posts'] = $this->ClubhousePost->getClubhousePosts($race);
+        if ($this->_isAuthorizedToVisit($place)) {
+            // get clubhouse posts
+            $data['posts'] = $this->ClubhousePost->getPosts($place);
+        } else {
+            $data['error'] = 'Nemáš postavu s danou rasou a preto nemôžem navštíviť túto klubovňu.';
+        }
 
         $this->load->view('clubhouses/race', $data);
     }
@@ -56,7 +60,9 @@ class Clubhouses extends CI_Controller {
         $id = trim($this->input->post('id'));
         $place = trim($this->input->post('place'));
 
-        if (!$id || $id == '') {
+        if (!$this->_isAuthorizedToManage) {
+            $this->session->set_flashdata('error', 'Nemáš oprávnenie mazať tento príspevok.');
+        } else if (!$id || $id == '') {
             $this->session->set_flashdata('error', 'Id príspevku nebolo zadané.');
         } else {
             if ($this->ClubhousePost->deletePost($id)) {
@@ -77,7 +83,9 @@ class Clubhouses extends CI_Controller {
         $id = trim($this->input->post('id'));
         $place = trim($this->input->post('id'));
 
-        if (!$message || $message == '') {
+        if (!$this->_isAuthorizedToManage) {
+            $this->session->set_flashdata('error', 'Nemáš oprávnenie upravovať tento príspevok.');
+        } else if ($message || $message == '') {
             $this->session->set_flashdata('error', 'Nezadal si obsah správy.');
         } else {
             if ($this->ClubhousePost->createPost($id, $message)) {
@@ -86,8 +94,40 @@ class Clubhouses extends CI_Controller {
                 $this->session->set_flashdata('error', 'Príspevok sa nepodarilo pridať. Skúste to neskôr.');
             }
         }
-        
+
         redirect('clubhouses/race/' . $place); // redirect to the clubhouse
+    }
+
+    /**
+     * Checks if the user has the right to do a action
+     * 
+     * Note: A bit ugly. May need refactoring..
+     */
+    public function _isAuthorizedToVisit($place) {
+        /* To-Do: Allow admin */
+
+        $this->load->model('User');
+        $races_arrays = $this->User->getAllRaces($this->session->userdata('id'));
+
+        $races = array();
+        foreach ($races_arrays as $arr) {
+            array_push($races, $arr['race']);
+        }
+
+        return in_array($place, $races);
+    }
+
+    /**
+     * Checks if the user has the right to do a action
+     * 
+     * Note: A bit ugly. May need refactoring..
+     */
+    public function _isAuthorizedToManage($id) {
+        /* To-Do: Allow admin */
+
+        $post = $this->ClubhousePost->getPost($id);
+
+        return $post['user_id'] == $this->session->userdata('id');
     }
 
 }
