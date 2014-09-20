@@ -60,7 +60,7 @@ class Clubhouses extends CI_Controller {
         $id = trim($this->input->post('id'));
         $place = trim($this->input->post('place'));
 
-        if (!$this->_isAuthorizedToManage) {
+        if (!$this->_isAuthorizedToManage($id)) {
             $this->session->set_flashdata('error', 'Nemáš oprávnenie mazať tento príspevok.');
         } else if (!$id || $id == '') {
             $this->session->set_flashdata('error', 'Id príspevku nebolo zadané.');
@@ -83,7 +83,7 @@ class Clubhouses extends CI_Controller {
         $id = trim($this->input->post('id'));
         $place = trim($this->input->post('id'));
 
-        if (!$this->_isAuthorizedToManage) {
+        if (!$this->_isAuthorizedToManage($id)) {
             $this->session->set_flashdata('error', 'Nemáš oprávnenie upravovať tento príspevok.');
         } else if ($message || $message == '') {
             $this->session->set_flashdata('error', 'Nezadal si obsah správy.');
@@ -99,7 +99,7 @@ class Clubhouses extends CI_Controller {
     }
 
     /**
-     * Checks if the user has the right to do a action
+     * Checks if the user has the right to visit the clubhouse
      * 
      * Note: A bit ugly. May need refactoring..
      */
@@ -119,8 +119,6 @@ class Clubhouses extends CI_Controller {
 
     /**
      * Checks if the user has the right to do a action
-     * 
-     * Note: A bit ugly. May need refactoring..
      */
     public function _isAuthorizedToManage($id) {
         /* To-Do: Allow admin */
