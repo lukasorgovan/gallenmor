@@ -63,7 +63,7 @@ class ClubhousePost extends CI_Model {
 
         $sql = "SELECT c.*, u.username, u.avatar FROM clubhouse_posts c
             JOIN users u ON c.user_id = u.id
-            WHERE place = ?
+            WHERE place = ? AND deleted = 0
             ORDER BY created DESC
             LIMIT ?, ?";
         $query = $this->db->query($sql, array($place, $offset, $per_page));
