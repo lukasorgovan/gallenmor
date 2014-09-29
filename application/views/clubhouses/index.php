@@ -10,6 +10,8 @@
     <?php
     $data['races'] = $user_races;
     $this->load->view('clubhouses/_icons', $data);
+    
+    echo $description;
     ?>
 
 </div>

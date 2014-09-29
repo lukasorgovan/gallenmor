@@ -166,4 +166,16 @@ class ClubhousePost extends CI_Model {
         return $data;
     }
 
+    public function getClubhouseDescription() {
+        // get prolog text
+        $sql = "SELECT * FROM texts WHERE label = 'races'";
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            return $result['content'];
+        }
+        return '';
+    }
+
 }
