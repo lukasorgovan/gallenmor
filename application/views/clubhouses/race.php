@@ -6,7 +6,10 @@
     </header>
 
     <h1><?= $race ?></h1>
-    <?php $this->load->view('clubhouses/_icons'); ?>
+    <?php
+    $data['races'] = $user_races;
+    $this->load->view('clubhouses/_icons', $data);
+    ?>
 
     <?php if ($this->session->flashdata('success')) : ?>
         <div class="successMessage"><?= $this->session->flashdata('success') ?></div>

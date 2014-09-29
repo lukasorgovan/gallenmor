@@ -12,7 +12,10 @@ class Clubhouses extends CI_Controller {
      * Displays static text with links to all race clubhouses
      */
     public function index() {
-        $this->load->view('clubhouses/index');
+        // get all races to show disabled links to not accessible clubhouses
+        $data['user_races'] = $this->getAccessibleRaces();
+
+        $this->load->view('clubhouses/index', $data);
     }
 
     /**
@@ -22,6 +25,9 @@ class Clubhouses extends CI_Controller {
      */
     public function race($place) {
         $data['race'] = $place;
+
+        // get all races to show disabled links to not accessible clubhouses
+        $data['user_races'] = $this->getAccessibleRaces();
 
         if ($this->_isAuthorizedToVisit($place)) {
             // get clubhouse posts
@@ -82,7 +88,7 @@ class Clubhouses extends CI_Controller {
         $message = trim($this->input->post('message'));
         $id = trim($this->input->post('id'));
         $place = trim($this->input->post('place'));
-        
+
         if (!$this->_isAuthorizedToManage($id)) {
             $this->session->set_flashdata('error', 'Nemáš oprávnenie upravovať tento príspevok.');
         } else if (!$message || $message == '') {
@@ -115,24 +121,20 @@ class Clubhouses extends CI_Controller {
     /**
      * Checks if the user has the right to visit the clubhouse
      * 
-     * Note: A bit ugly. May need refactoring..
+     * @param string $place Clubhouse identification string
      */
     public function _isAuthorizedToVisit($place) {
         /* To-Do: Allow admin */
-
-        $this->load->model('User');
-        $races_arrays = $this->User->getAllRaces($this->session->userdata('id'));
-
-        $races = array();
-        foreach ($races_arrays as $arr) {
-            array_push($races, $arr['race']);
-        }
+        $races = $this->getAccessibleRaces();
 
         return in_array($place, $races);
     }
 
     /**
      * Checks if the user has the right to do a action
+     * 
+     * @param int $id Id of the post to be managed
+     * @return boolean Condition if the user is able to manage a post
      */
     public function _isAuthorizedToManage($id) {
         /* To-Do: Allow admin */
@@ -140,6 +142,23 @@ class Clubhouses extends CI_Controller {
         $post = $this->ClubhousePost->getPost($id);
 
         return $post['user_id'] == $this->session->userdata('id');
+    }
+
+    /**
+     * Get all races of the characters a user has
+     * Note: A bit ugly. May need refactoring..
+     * 
+     * @return array Array of races
+     */
+    private function getAccessibleRaces() {
+        $this->load->model('User');
+        $races_arrays = $this->User->getUserRaces($this->session->userdata('id'));
+
+        $races = array();
+        foreach ($races_arrays as $arr) {
+            array_push($races, $arr['race']);
+        }
+        return $races;
     }
 
 }

@@ -7,7 +7,10 @@
 
     <h1>Rasové klubovne</h1>
     <div id="hovered-race">Cigáni</div>
-    <?php $this->load->view('clubhouses/_icons'); ?>
+    <?php
+    $data['races'] = $user_races;
+    $this->load->view('clubhouses/_icons', $data);
+    ?>
 
 </div>
 

@@ -129,7 +129,7 @@ class User extends CI_Model {
      * 
      * @param int $user_id
      */
-    public function getAllRaces($user_id) {
+    public function getUserRaces($user_id) {
         $sql = "SELECT race FROM characters WHERE id_user = ?";
         $query = $this->db->query($sql, array($user_id));
 
