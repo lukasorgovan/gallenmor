@@ -133,31 +133,37 @@ class ClubhousePost extends CI_Model {
         return $races;
     }
 
+    /**
+     * Get metadata (prolog text and name of the race) for a clubhouse.
+     * 
+     * @param string $place Clubhouse identification string
+     * @return array Array containing two information - prolog text and race name
+     */
     public function getClubhouseMeta($place) {
         // get prolog text
         $sql = "SELECT * FROM texts WHERE label = ?";
         $query = $this->db->query($sql, array($place));
 
         if ($query->num_rows() > 0) {
-           $result = $query->row_array();
-           $data['text'] = $result['content'];
+            $result = $query->row_array();
+            $data['text'] = $result['content'];
         } else {
             $data['text'] = "";
         }
-        
+
         // get race name
         $sql = "SELECT * FROM races WHERE codename = ?";
         $query = $this->db->query($sql, array($place));
 
         if ($query->num_rows() > 0) {
-           $result = $query->row_array();
-           $data['name'] = $result['name'];
+            $result = $query->row_array();
+            $data['name'] = $result['name'];
         } else {
             $data['name'] = "";
         }
-        
+
+        // return final data
         return $data;
-        
     }
 
 }
