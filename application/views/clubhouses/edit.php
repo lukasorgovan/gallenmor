@@ -14,7 +14,7 @@
         ?>
         <form action="<?= site_url('clubhouses/updatePost') ?>" method="POST" id="edit_post_form">
             <textarea name="message" cols="50" rows="10"><?= $post['message'] ?></textarea>
-            <input type="hidden" name="place" value="<?= $post['place'] ?>" />
+            <input type="hidden" name="codename" value="<?= $post['codename'] ?>" />
             <input type="hidden" name="id" value="<?= $post['id'] ?>" />
             <input type="submit" value="Upraviť" />
         </form>

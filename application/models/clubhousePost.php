@@ -6,13 +6,13 @@ class ClubhousePost extends CI_Model {
      * Create new post in a clubhouse
      *  
      * @param string $message Message content
-     * @param string $place Specific string identifying to which clubhouse the post belongs to
+     * @param string $codename Specific string identifying to which clubhouse the post belongs to
      * @return boolean If the post was successfuly created
      */
-    public function createPost($message, $place) {
-        $sql = "INSERT INTO clubhouse_posts (user_id, message, place) VALUES (?, ?, ?)";
+    public function createPost($message, $codename) {
+        $sql = "INSERT INTO clubhouse_posts (user_id, message, codename) VALUES (?, ?, ?)";
         $this->db->trans_start();
-        $this->db->query($sql, array($this->session->userdata('id'), $message, $place));
+        $this->db->query($sql, array($this->session->userdata('id'), $message, $codename));
         $this->db->trans_complete();
 
         return $this->db->trans_status();
@@ -53,20 +53,20 @@ class ClubhousePost extends CI_Model {
     /**
      * Returns clubhouse posts for specified clubhouse with optional parameters
      * 
-     * @param string $place Clubhouse identification string
+     * @param string $codename Clubhouse identification string
      * @param int $page Number of posts page to be shown
      * @param int $per_page How many posts should be shown per page
      * @return array Array of posts
      */
-    public function getPosts($place, $page = 1, $per_page = 15) {
+    public function getPosts($codename, $page = 1, $per_page = 15) {
         $offset = ($page - 1) * $per_page;
 
         $sql = "SELECT c.*, u.username, u.avatar FROM clubhouse_posts c
             JOIN users u ON c.user_id = u.id
-            WHERE place = ? AND deleted = 0
+            WHERE codename = ? AND deleted = 0
             ORDER BY created DESC
             LIMIT ?, ?";
-        $query = $this->db->query($sql, array($place, $offset, $per_page));
+        $query = $this->db->query($sql, array($codename, $offset, $per_page));
 
         if ($query->num_rows() > 0) {
             return $query->result_array();
@@ -93,13 +93,13 @@ class ClubhousePost extends CI_Model {
     /**
      * Checks if the user has the right to visit the clubhouse
      * 
-     * @param string $place Clubhouse identification string
+     * @param string $codename Clubhouse identification string
      */
-    public function isAuthorizedToVisit($place) {
+    public function isAuthorizedToVisit($codename) {
         /* To-Do: Allow admin */
         $races = $this->getAccessibleRaces();
 
-        return in_array($place, $races);
+        return in_array($codename, $races);
     }
 
     /**
@@ -136,13 +136,13 @@ class ClubhousePost extends CI_Model {
     /**
      * Get metadata (prolog text and name of the race) for a clubhouse.
      * 
-     * @param string $place Clubhouse identification string
+     * @param string $codename Clubhouse identification string
      * @return array Array containing two information - prolog text and race name
      */
-    public function getClubhouseMeta($place) {
+    public function getClubhouseMeta($codename) {
         // get prolog text
         $sql = "SELECT * FROM texts WHERE label = ?";
-        $query = $this->db->query($sql, array($place));
+        $query = $this->db->query($sql, array($codename));
 
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -153,7 +153,7 @@ class ClubhousePost extends CI_Model {
 
         // get race name
         $sql = "SELECT * FROM races WHERE codename = ?";
-        $query = $this->db->query($sql, array($place));
+        $query = $this->db->query($sql, array($codename));
 
         if ($query->num_rows() > 0) {
             $result = $query->row_array();

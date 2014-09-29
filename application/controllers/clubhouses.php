@@ -24,20 +24,20 @@ class Clubhouses extends CI_Controller {
     /**
      * Displays specified clubhouse
      * 
-     * @param string $place Clubhouse identification string
+     * @param string $codename Clubhouse identification string
      */
-    public function race($place) {
-        $data['race'] = $place;
+    public function race($codename) {
+        $data['race'] = $codename;
 
         // get all races to show disabled links to not accessible clubhouses
         $data['user_races'] = $this->ClubhousePost->getAccessibleRaces();
 
         // get metadata
-        $data['metadata'] = $this->ClubhousePost->getClubhouseMeta($place);
+        $data['metadata'] = $this->ClubhousePost->getClubhouseMeta($codename);
 
-        if ($this->ClubhousePost->isAuthorizedToVisit($place)) {
+        if ($this->ClubhousePost->isAuthorizedToVisit($codename)) {
             // get clubhouse posts
-            $data['posts'] = $this->ClubhousePost->getPosts($place);
+            $data['posts'] = $this->ClubhousePost->getPosts($codename);
         } else {
             $data['error'] = 'Nemáš postavu s danou rasou a preto nemôžem navštíviť túto klubovňu.';
         }
@@ -50,19 +50,19 @@ class Clubhouses extends CI_Controller {
      */
     public function addPost() {
         $message = trim($this->input->post('message'));
-        $place = trim($this->input->post('place'));
+        $codename = trim($this->input->post('codename'));
 
         if (!$message || $message == '') {
             $this->session->set_flashdata('error', 'Nezadal si obsah správy.');
         } else {
-            if ($this->ClubhousePost->createPost($message, $place)) {
+            if ($this->ClubhousePost->createPost($message, $codename)) {
                 $this->session->set_flashdata('success', 'Príspevok bol pridaný.');
             } else {
                 $this->session->set_flashdata('error', 'Príspevok sa nepodarilo pridať. Skúste to neskôr.');
             }
         }
 
-        redirect('clubhouses/race/' . $place); // redirect to the clubhouse
+        redirect('clubhouses/race/' . $codename); // redirect to the clubhouse
     }
 
     /**
@@ -70,7 +70,7 @@ class Clubhouses extends CI_Controller {
      */
     public function deletePost() {
         $id = trim($this->input->post('id'));
-        $place = trim($this->input->post('place'));
+        $codename = trim($this->input->post('codename'));
 
         if (!$this->ClubhousePost->isAuthorizedToManage($id)) {
             $this->session->set_flashdata('error', 'Nemáš oprávnenie mazať tento príspevok.');
@@ -84,7 +84,7 @@ class Clubhouses extends CI_Controller {
             }
         }
 
-        redirect('clubhouses/race/' . $place); // redirect to the clubhouse
+        redirect('clubhouses/race/' . $codename); // redirect to the clubhouse
     }
 
     /**
@@ -93,7 +93,7 @@ class Clubhouses extends CI_Controller {
     public function updatePost() {
         $message = trim($this->input->post('message'));
         $id = trim($this->input->post('id'));
-        $place = trim($this->input->post('place'));
+        $codename = trim($this->input->post('codename'));
 
         if (!$this->ClubhousePost->isAuthorizedToManage($id)) {
             $this->session->set_flashdata('error', 'Nemáš oprávnenie upravovať tento príspevok.');
@@ -107,7 +107,7 @@ class Clubhouses extends CI_Controller {
             }
         }
 
-        redirect('clubhouses/race/' . $place); // redirect to the clubhouse
+        redirect('clubhouses/race/' . $codename); // redirect to the clubhouse
     }
 
     /**
