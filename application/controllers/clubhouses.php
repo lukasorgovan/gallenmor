@@ -29,6 +29,9 @@ class Clubhouses extends CI_Controller {
         // get all races to show disabled links to not accessible clubhouses
         $data['user_races'] = $this->ClubhousePost->getAccessibleRaces();
 
+        // get metadata
+        $data['metadata'] = $this->ClubhousePost->getClubhouseMeta($place);
+
         if ($this->ClubhousePost->isAuthorizedToVisit($place)) {
             // get clubhouse posts
             $data['posts'] = $this->ClubhousePost->getPosts($place);

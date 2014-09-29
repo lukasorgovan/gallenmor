@@ -5,7 +5,8 @@
         <?php $this->load->view('layout/game/menu'); ?>
     </header>
 
-    <h1><?= $race ?></h1>
+    <h1><?= $metadata['name'] ?></h1>
+    <p><?= $metadata['text'] ?></p>
     <?php
     $data['races'] = $user_races;
     $this->load->view('clubhouses/_icons', $data);

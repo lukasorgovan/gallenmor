@@ -133,4 +133,31 @@ class ClubhousePost extends CI_Model {
         return $races;
     }
 
+    public function getClubhouseMeta($place) {
+        // get prolog text
+        $sql = "SELECT * FROM texts WHERE label = ?";
+        $query = $this->db->query($sql, array($place));
+
+        if ($query->num_rows() > 0) {
+           $result = $query->row_array();
+           $data['text'] = $result['content'];
+        } else {
+            $data['text'] = "";
+        }
+        
+        // get race name
+        $sql = "SELECT * FROM races WHERE codename = ?";
+        $query = $this->db->query($sql, array($place));
+
+        if ($query->num_rows() > 0) {
+           $result = $query->row_array();
+           $data['name'] = $result['name'];
+        } else {
+            $data['name'] = "";
+        }
+        
+        return $data;
+        
+    }
+
 }
