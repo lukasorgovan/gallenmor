@@ -74,6 +74,12 @@ class ClubhousePost extends CI_Model {
         return array();
     }
 
+    /**
+     * Get information for a post
+     * 
+     * @param int $id Id of the post
+     * @return array Information about the post in an array
+     */
     public function getPost($id) {
         $sql = "SELECT * FROM clubhouse_posts WHERE id = ?";
         $query = $this->db->query($sql, array($id));
@@ -82,6 +88,49 @@ class ClubhousePost extends CI_Model {
             return $query->row_array();
         }
         return array();
+    }
+
+    /**
+     * Checks if the user has the right to visit the clubhouse
+     * 
+     * @param string $place Clubhouse identification string
+     */
+    public function isAuthorizedToVisit($place) {
+        /* To-Do: Allow admin */
+        $races = $this->getAccessibleRaces();
+
+        return in_array($place, $races);
+    }
+
+    /**
+     * Checks if the user has the right to do a action
+     * 
+     * @param int $id Id of the post to be managed
+     * @return boolean Condition if the user is able to manage a post
+     */
+    public function isAuthorizedToManage($id) {
+        /* To-Do: Allow admin */
+
+        $post = $this->getPost($id);
+
+        return $post['user_id'] == $this->session->userdata('id');
+    }
+
+    /**
+     * Get all races of the characters a user has
+     * Note: A bit ugly. May need refactoring..
+     * 
+     * @return array Array of races
+     */
+    public function getAccessibleRaces() {
+        $this->load->model('User');
+        $races_arrays = $this->User->getUserRaces($this->session->userdata('id'));
+
+        $races = array();
+        foreach ($races_arrays as $arr) {
+            array_push($races, $arr['race']);
+        }
+        return $races;
     }
 
 }

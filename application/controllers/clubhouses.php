@@ -13,7 +13,7 @@ class Clubhouses extends CI_Controller {
      */
     public function index() {
         // get all races to show disabled links to not accessible clubhouses
-        $data['user_races'] = $this->getAccessibleRaces();
+        $data['user_races'] = $this->ClubhousePost->getAccessibleRaces();
 
         $this->load->view('clubhouses/index', $data);
     }
@@ -27,9 +27,9 @@ class Clubhouses extends CI_Controller {
         $data['race'] = $place;
 
         // get all races to show disabled links to not accessible clubhouses
-        $data['user_races'] = $this->getAccessibleRaces();
+        $data['user_races'] = $this->ClubhousePost->getAccessibleRaces();
 
-        if ($this->_isAuthorizedToVisit($place)) {
+        if ($this->ClubhousePost->isAuthorizedToVisit($place)) {
             // get clubhouse posts
             $data['posts'] = $this->ClubhousePost->getPosts($place);
         } else {
@@ -66,7 +66,7 @@ class Clubhouses extends CI_Controller {
         $id = trim($this->input->post('id'));
         $place = trim($this->input->post('place'));
 
-        if (!$this->_isAuthorizedToManage($id)) {
+        if (!$this->ClubhousePost->isAuthorizedToManage($id)) {
             $this->session->set_flashdata('error', 'Nemáš oprávnenie mazať tento príspevok.');
         } else if (!$id || $id == '') {
             $this->session->set_flashdata('error', 'Id príspevku nebolo zadané.');
@@ -89,7 +89,7 @@ class Clubhouses extends CI_Controller {
         $id = trim($this->input->post('id'));
         $place = trim($this->input->post('place'));
 
-        if (!$this->_isAuthorizedToManage($id)) {
+        if (!$this->ClubhousePost->isAuthorizedToManage($id)) {
             $this->session->set_flashdata('error', 'Nemáš oprávnenie upravovať tento príspevok.');
         } else if (!$message || $message == '') {
             $this->session->set_flashdata('error', 'Nezadal si obsah správy.');
@@ -110,55 +110,12 @@ class Clubhouses extends CI_Controller {
      * @param int $id Id of the post to be edited
      */
     public function edit($id) {
-        if (!$this->_isAuthorizedToManage($id)) {
+        if (!$this->ClubhousePost->isAuthorizedToManage($id)) {
             $data['error'] = 'Nemáš oprávnenie upravovať tento príspevok.';
         } else {
             $data['post'] = $this->ClubhousePost->getPost($id);
         }
         $this->load->view('clubhouses/edit', $data);
-    }
-
-    /**
-     * Checks if the user has the right to visit the clubhouse
-     * 
-     * @param string $place Clubhouse identification string
-     */
-    public function _isAuthorizedToVisit($place) {
-        /* To-Do: Allow admin */
-        $races = $this->getAccessibleRaces();
-
-        return in_array($place, $races);
-    }
-
-    /**
-     * Checks if the user has the right to do a action
-     * 
-     * @param int $id Id of the post to be managed
-     * @return boolean Condition if the user is able to manage a post
-     */
-    public function _isAuthorizedToManage($id) {
-        /* To-Do: Allow admin */
-
-        $post = $this->ClubhousePost->getPost($id);
-
-        return $post['user_id'] == $this->session->userdata('id');
-    }
-
-    /**
-     * Get all races of the characters a user has
-     * Note: A bit ugly. May need refactoring..
-     * 
-     * @return array Array of races
-     */
-    private function getAccessibleRaces() {
-        $this->load->model('User');
-        $races_arrays = $this->User->getUserRaces($this->session->userdata('id'));
-
-        $races = array();
-        foreach ($races_arrays as $arr) {
-            array_push($races, $arr['race']);
-        }
-        return $races;
     }
 
 }
