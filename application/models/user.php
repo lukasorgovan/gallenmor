@@ -124,4 +124,19 @@ class User extends CI_Model {
         return $this->db->trans_status();
     }
 
+    /**
+     * Returns array of races the user's characters have
+     * 
+     * @param int $user_id
+     */
+    public function getUserRaces($user_id) {
+        $sql = "SELECT race FROM characters WHERE id_user = ?";
+        $query = $this->db->query($sql, array($user_id));
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return array();
+    }
+
 }
