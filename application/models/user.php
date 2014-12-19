@@ -69,6 +69,7 @@ class User extends CI_Model {
                         "forum_rank" => $row->forum_rank,
                         "avatar" => $row->avatar,
                         "banned" => $row->banned,
+                        "authority" => $row->authority,
                         "login_state" => TRUE
                     ));
                     return TRUE;
