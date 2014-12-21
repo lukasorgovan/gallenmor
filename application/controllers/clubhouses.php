@@ -1,6 +1,6 @@
 <?php
 
-class Clubhouses extends CI_Controller {
+class Clubhouses extends LoggedController {
 
     public function __construct() {
         parent::__construct();
