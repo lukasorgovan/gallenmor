@@ -24,20 +24,23 @@
         <div class="errorMessage"><?= $error ?></div>
         <?php
     } else {
-        ?>
-        <button onclick="$('#new_message_form').slideToggle()">Pridaj príspevok</button><br>
+        if ($this->session->userdata('authority') == 99) {
+            ?>
+            <button onclick="$('#new_message_form').slideToggle()">Pridaj príspevok</button><br>
 
 
-        <form action="<?= site_url('wall/create') ?>" method="POST" id="new_message_form" style="display: none">
-            <input type="text" name="title" placeholder="Titulok" maxlength="256" required><br>
-            <input type="text" name="rpg_author" placeholder="RPG autor (voliteľné - prepíše meno účtu z ktorého to bolo poslané)" maxlength="128"><br>
-            <textarea name="message" cols="50" rows="10" required></textarea>
-            <input type="hidden" name="section" value="<?= $section ?>" />
-            <input type="hidden" name="section_name" value="<?= $this->uri->segment(2); ?>" />
-            <input type="submit" value="Odoslať" />
-        </form>
+            <form action="<?= site_url('wall/create') ?>" method="POST" id="new_message_form" style="display: none">
+                <input type="text" name="title" placeholder="Titulok" maxlength="256" required><br>
+                <input type="text" name="rpg_author" placeholder="RPG autor (voliteľné - prepíše meno účtu z ktorého to bolo poslané)" maxlength="128"><br>
+                <textarea name="message" cols="50" rows="10" required></textarea>
+                <input type="hidden" name="section" value="<?= $section ?>" />
+                <input type="hidden" name="section_name" value="<?= $this->uri->segment(2); ?>" />
+                <input type="submit" value="Odoslať" />
+            </form>
 
-        <?php
+            <?php
+        }
+
         if (count($posts) == 0) {
             echo "<tr><td>V tejto sekcii nie sú žiadne príspevky</td></tr>";
         }
