@@ -21,7 +21,7 @@
         }
         ?>
         <form action="<?= site_url('wall/update') ?>" method="POST" id="edit_post_form">
-            <input type="text" name="title" placeholder="Titulok" maxlength="256" value="<?= $post['title']; ?>" required><br>
+            <input type="text" name="title" placeholder="Titulok" maxlength="255" value="<?= $post['title']; ?>" required><br>
             <input type="text" name="rpg_author" placeholder="RPG autor (voliteľné - prepíše meno účtu z ktorého to bolo poslané)" value="<?= $post['rpg_author']; ?>" maxlength="128"><br>
             <textarea name="message" cols="50" rows="10"><?= $post['message'] ?></textarea>
             <input type="hidden" name="section" value="<?= $post['section'] ?>" />
