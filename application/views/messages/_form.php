@@ -1,4 +1,4 @@
-<form action = "<?= site_url('messages/sendMessage') ?>" method = "POST">
+<form action = "<?= site_url('messages/send') ?>" method = "POST">
     <?php if (!isset($user_id)) { ?>
         <select name="user">
             <?php

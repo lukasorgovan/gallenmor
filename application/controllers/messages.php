@@ -1,10 +1,10 @@
 <?php
 
-class Messages extends LoggedController {
+class messages extends LoggedController {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Message');
+        $this->load->model('message');
     }
 
     /**
@@ -18,14 +18,14 @@ class Messages extends LoggedController {
      * Displays received messages for the user
      */
     public function inbox() {
-        $data['messages'] = $this->Message->getReceivedMessagesForUser($this->session->userdata('id'));
+        $data['messages'] = $this->message->get_received_messages($this->session->userdata('id'));
         $this->load->view('messages/inbox', $data);
     }
 
     /**
      * Displays incoming messages for the user
      */
-    public function newMessage() {
+    public function create() {
         $this->load->model('User');
         $data['users'] = $this->User->getAllUsers(true);
 
@@ -36,14 +36,14 @@ class Messages extends LoggedController {
     /**
      * Creates new message
      */
-    public function sendMessage() {
+    public function send() {
         $message = trim($this->input->post('message'));
         $to_user = trim($this->input->post('user'));
 
         if ($message == "" || !$message) {
             $this->session->set_flashdata('error', 'Nevyplnili ste obsah správy.');
         } else {
-            if ($this->Message->sendMessage($this->session->userdata('id'), $to_user, $message)) {
+            if ($this->message->send($this->session->userdata('id'), $to_user, $message)) {
                 $this->session->set_flashdata('success', 'Správa bola odoslaná.');
             } else {
                 $this->session->set_flashdata('message', $message); // save the message
@@ -56,7 +56,7 @@ class Messages extends LoggedController {
         if ($this->input->post('conv_id') && $this->input->post('conv_id') != 0) {
             redirect('messages/conversation/' . $this->input->post('conv_id'));
         } else {
-            redirect('messages/newMessage');
+            redirect('messages/create');
         }
     }
 
@@ -65,7 +65,8 @@ class Messages extends LoggedController {
      * @param int $id Id of the conversation
      */
     public function conversation($id) {
-        $info = $this->Message->getConversationInfo($id);
+        $info = $this->message->get_conversation_info($id);
+       
 
         if (count($info) == 0) {
             $data['error'] = 'Zadaná konverzácia neexistuje.';
@@ -84,7 +85,7 @@ class Messages extends LoggedController {
                 $data['username'] = $info->u2username;
             }
 
-            $data['messages'] = $this->Message->getConversationMessages($info->from_user_id, $info->to_user_id);
+            $data['messages'] = $this->message->get_messages($info->from_user_id, $info->to_user_id);
         }
 
         $this->load->view('messages/conversation', $data);

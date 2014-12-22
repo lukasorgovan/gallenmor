@@ -10,7 +10,7 @@ class Message extends CI_Model {
      * @param int $per_page Pagination
      * @return type Array of conversations
      */
-    public function getReceivedMessagesForUser($user_id, $page = 1, $per_page = 15) {
+    public function get_received_messages($user_id, $page = 1, $per_page = 15) {
         // build query
         $offset = ($page - 1) * $per_page;
 
@@ -39,7 +39,7 @@ class Message extends CI_Model {
      * Return conversation information for one message
      * @param type $id
      */
-    public function getConversationInfo($id) {
+    public function get_conversation_info($id) {
         $sql = "SELECT from_user_id, to_user_id, created, u1.username AS u1username, u2.username AS u2username "
                 . "FROM messages m "
                 . "JOIN users u1 ON m.from_user_id = u1.id "
@@ -58,7 +58,7 @@ class Message extends CI_Model {
      * Return conversation information for one message
      * @param type $id
      */
-    public function getConversationMessages($from_user_id, $to_user_id) {
+    public function get_messages($from_user_id, $to_user_id) {
         $sql = "SELECT from_user_id, to_user_id, created, message, u1.username AS u1username, u2.username AS u2username "
                 . "FROM messages m "
                 . "JOIN users u1 ON m.from_user_id = u1.id "
@@ -81,7 +81,7 @@ class Message extends CI_Model {
      * @param int $message Message's content
      * @return boolean Result of transaction
      */
-    public function sendMessage($from_id, $to_id, $message) {
+    public function send($from_id, $to_id, $message) {
         $sql = "INSERT INTO messages (from_user_id, to_user_id, message) VALUES (?, ?, ?)";
         $this->db->trans_start();
         $this->db->query($sql, array($from_id, $to_id, $message));
