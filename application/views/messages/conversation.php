@@ -23,6 +23,7 @@
     ?>  
 
     <h2>Konverzácia s <?php echo $username ?></h2>
+    <?php $this->load->view('messages/_type_selector'); ?>
     <?php $this->load->view('messages/_form'); ?>
 
     <?php

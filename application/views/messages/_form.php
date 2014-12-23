@@ -16,6 +16,7 @@
             echo $this->session->flashdata('message');
         }
         ?></textarea>
+    <input type="hidden" name="send_type" value="bird">
     <input type="hidden" name="conv_id" value="<?= $this->uri->segment(3) ? $this->uri->segment(3) : 0 ?>">
     <input type="submit" value="Odoslať správu" class="button"/>
 </form>

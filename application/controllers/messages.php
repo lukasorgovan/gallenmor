@@ -26,9 +26,15 @@ class messages extends LoggedController {
      * Displays incoming messages for the user
      */
     public function create() {
-        $this->load->model('User');
-        $data['users'] = $this->User->getAllUsers(true);
+        $this->load->model('user');
 
+        // To-Do: Find out if bird is free
+        $bird_available = $this->message->get_bird_availability();
+        $data['bird_available'] = $bird_available;
+        $data['curtime'] = time();
+
+        // To-Do: Eh, this feature is already in admin-stuff branch under Admin_tools model
+        $data['users'] = $this->user->getAllusers(true);
 
         $this->load->view('messages/new_message', $data);
     }
@@ -39,15 +45,34 @@ class messages extends LoggedController {
     public function send() {
         $message = trim($this->input->post('message'));
         $to_user = trim($this->input->post('user'));
+        $send_type = trim($this->input->post('send_type'));
 
-        if ($message == "" || !$message) {
-            $this->session->set_flashdata('error', 'Nevyplnili ste obsah správy.');
+        // test if user has enough parchment etc.
+        if (!$this->message->check_message_supplies()) {
+            
         } else {
-            if ($this->message->send($this->session->userdata('id'), $to_user, $message)) {
-                $this->session->set_flashdata('success', 'Správa bola odoslaná.');
+            // check if user has enough food or gold to send message
+            if (!$this->message->send_type($send_type)) {
+                if ($send_type == 'bird') {
+                    $this->session->set_flashdata('error', 'Správu sa nepodarilo odoslať, pretože nemáte dostatok krmiva pre vtáka.');
+                } else {
+                    
+                }
             } else {
-                $this->session->set_flashdata('message', $message); // save the message
-                $this->session->set_flashdata('error', 'Správu sa nepodarilo odoslať. Skúste to opäť neskôr.');
+                // To-Do: Calculate delivery time
+                $delivered = time() + 60;
+
+                // message can be send
+                if ($message == "" || !$message) {
+                    $this->session->set_flashdata('error', 'Nevyplnili ste obsah správy.');
+                } else {
+                    if ($this->message->send($this->session->userdata('id'), $to_user, $message, $delivered)) {
+                        $this->session->set_flashdata('success', 'Správa bola odoslaná.');
+                    } else {
+                        $this->session->set_flashdata('message', $message); // save the message
+                        $this->session->set_flashdata('error', 'Správu sa nepodarilo odoslať. Skúste to opäť neskôr.');
+                    }
+                }
             }
         }
 
@@ -66,7 +91,12 @@ class messages extends LoggedController {
      */
     public function conversation($id) {
         $info = $this->message->get_conversation_info($id);
-       
+
+        // To-Do: Find out if bird is free
+        $bird_available = $this->message->get_bird_availability();
+        $data['bird_available'] = $bird_available;
+        $data['curtime'] = time();
+
 
         if (count($info) == 0) {
             $data['error'] = 'Zadaná konverzácia neexistuje.';
