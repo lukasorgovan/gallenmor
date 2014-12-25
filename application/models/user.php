@@ -139,8 +139,14 @@ class User extends CI_Model {
             $sql = "SELECT id, username FROM users ORDER BY username ASC";
             $query = $this->db->query($sql);
         }
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return array();
     }
-     /**
+
+    /**
      *  Returns array of races the user's characters have
      * 
      * @param int $user_id
