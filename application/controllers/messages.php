@@ -1,6 +1,6 @@
 <?php
 
-class messages extends LoggedController {
+class Messages extends LoggedController {
 
     public function __construct() {
         parent::__construct();
