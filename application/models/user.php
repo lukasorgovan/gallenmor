@@ -69,6 +69,7 @@ class User extends CI_Model {
                         "forum_rank" => $row->forum_rank,
                         "avatar" => $row->avatar,
                         "banned" => $row->banned,
+                        "authority" => $row->authority,
                         "login_state" => TRUE
                     ));
                     return TRUE;
@@ -138,6 +139,15 @@ class User extends CI_Model {
             $sql = "SELECT id, username FROM users ORDER BY username ASC";
             $query = $this->db->query($sql);
         }
+    }
+     /**
+     *  Returns array of races the user's characters have
+     * 
+     * @param int $user_id
+     */
+    public function getUserRaces($user_id) {
+        $sql = "SELECT race FROM characters WHERE id_user = ?";
+        $query = $this->db->query($sql, array($user_id));
 
         if ($query->num_rows() > 0) {
             return $query->result_array();
