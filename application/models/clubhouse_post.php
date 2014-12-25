@@ -1,6 +1,6 @@
 <?php
 
-class ClubhousePost extends CI_Model {
+class Clubhouse_post extends CI_Model {
 
     /**
      * Create new post in a clubhouse
@@ -9,7 +9,7 @@ class ClubhousePost extends CI_Model {
      * @param string $codename Specific string identifying to which clubhouse the post belongs to
      * @return boolean If the post was successfuly created
      */
-    public function createPost($message, $codename) {
+    public function create($message, $codename) {
         $sql = "INSERT INTO clubhouse_posts (user_id, message, codename) VALUES (?, ?, ?)";
         $this->db->trans_start();
         $this->db->query($sql, array($this->session->userdata('id'), $message, $codename));
@@ -25,7 +25,7 @@ class ClubhousePost extends CI_Model {
      * @param int $id Id of the post to be deleted
      * @return boolean If the post was successfuly deleted
      */
-    public function deletePost($id) {
+    public function delete($id) {
         $sql = "UPDATE clubhouse_posts SET deleted = 1 WHERE id = ?";
         $this->db->trans_start();
         $this->db->query($sql, array($id));
@@ -41,7 +41,7 @@ class ClubhousePost extends CI_Model {
      * @param string $message New content of the message
      * @return boolean If the post was successfuly updated
      */
-    public function updatePost($id, $message) {
+    public function update($id, $message) {
         $sql = "UPDATE clubhouse_posts SET message = ? WHERE id = ?";
         $this->db->trans_start();
         $this->db->query($sql, array($message, $id));
@@ -58,7 +58,7 @@ class ClubhousePost extends CI_Model {
      * @param int $per_page How many posts should be shown per page
      * @return array Array of posts
      */
-    public function getPosts($codename, $page = 1, $per_page = 15) {
+    public function get_posts($codename, $page = 1, $per_page = 15) {
         $offset = ($page - 1) * $per_page;
 
         $sql = "SELECT c.*, u.username, u.avatar FROM clubhouse_posts c
@@ -80,7 +80,7 @@ class ClubhousePost extends CI_Model {
      * @param int $id Id of the post
      * @return array Information about the post in an array
      */
-    public function getPost($id) {
+    public function get_post($id) {
         $sql = "SELECT * FROM clubhouse_posts WHERE id = ?";
         $query = $this->db->query($sql, array($id));
 
@@ -95,9 +95,9 @@ class ClubhousePost extends CI_Model {
      * 
      * @param string $codename Clubhouse identification string
      */
-    public function isAuthorizedToVisit($codename) {
+    public function is_authorized_to_visit($codename) {
         /* To-Do: Allow admin */
-        $races = $this->getAccessibleRaces();
+        $races = $this->get_accessible_races();
 
         return in_array($codename, $races);
     }
@@ -108,10 +108,10 @@ class ClubhousePost extends CI_Model {
      * @param int $id Id of the post to be managed
      * @return boolean Condition if the user is able to manage a post
      */
-    public function isAuthorizedToManage($id) {
+    public function is_authorized_to_manage($id) {
         /* To-Do: Allow admin */
 
-        $post = $this->getPost($id);
+        $post = $this->get_post($id);
 
         return $post['user_id'] == $this->session->userdata('id');
     }
@@ -122,7 +122,7 @@ class ClubhousePost extends CI_Model {
      * 
      * @return array Array of races
      */
-    public function getAccessibleRaces() {
+    public function get_accessible_races() {
         $this->load->model('User');
         $races_arrays = $this->User->getUserRaces($this->session->userdata('id'));
 
@@ -139,7 +139,7 @@ class ClubhousePost extends CI_Model {
      * @param string $codename Clubhouse identification string
      * @return array Array containing two information - prolog text and race name
      */
-    public function getClubhouseMeta($codename) {
+    public function get_clubhouse_meta($codename) {
         // get prolog text
         $sql = "SELECT * FROM texts WHERE label = ?";
         $query = $this->db->query($sql, array($codename));
@@ -166,7 +166,7 @@ class ClubhousePost extends CI_Model {
         return $data;
     }
 
-    public function getClubhouseDescription() {
+    public function get_clubhouse_description() {
         // get prolog text
         $sql = "SELECT * FROM texts WHERE label = 'races'";
         $query = $this->db->query($sql);
