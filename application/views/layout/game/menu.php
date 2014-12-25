@@ -5,4 +5,5 @@
     <li><?= anchor('profile', 'Profil postavy'); ?></li>
     <li><?= anchor('clubhouses', 'Rasové klubovne'); ?></li>
     <li><?= anchor('wall', 'Oznamy'); ?></li>
+    <li><?= anchor('items', 'Items');?></li>
 </ul>
