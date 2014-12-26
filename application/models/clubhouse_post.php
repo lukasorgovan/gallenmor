@@ -96,10 +96,7 @@ class Clubhouse_post extends CI_Model {
      * @param string $codename Clubhouse identification string
      */
     public function is_authorized_to_visit($codename) {
-        /* To-Do: Allow admin */
-        $races = $this->get_accessible_races();
-
-        return in_array($codename, $races);
+        return in_array($codename, $this->session->userdata('races')) || $this->session->userdata('authority') == 99;
     }
 
     /**
@@ -109,28 +106,8 @@ class Clubhouse_post extends CI_Model {
      * @return boolean Condition if the user is able to manage a post
      */
     public function is_authorized_to_manage($id) {
-        /* To-Do: Allow admin */
-
         $post = $this->get_post($id);
-
-        return $post['user_id'] == $this->session->userdata('id');
-    }
-
-    /**
-     * Get all races of the characters a user has
-     * Note: A bit ugly. May need refactoring..
-     * 
-     * @return array Array of races
-     */
-    public function get_accessible_races() {
-        $this->load->model('User');
-        $races_arrays = $this->User->getUserRaces($this->session->userdata('id'));
-
-        $races = array();
-        foreach ($races_arrays as $arr) {
-            array_push($races, $arr['race']);
-        }
-        return $races;
+        return $post['user_id'] == $this->session->userdata('id') || $this->session->userdata('authority') == 99;
     }
 
     /**

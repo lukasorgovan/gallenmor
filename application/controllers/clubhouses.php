@@ -13,7 +13,7 @@ class Clubhouses extends LoggedController {
      */
     public function index() {
         // get all races to show disabled links to not accessible clubhouses
-        $data['user_races'] = $this->clubhouse_post->get_accessible_races();
+        $data['user_races'] = $this->session->userdata('races');
 
         // get description of what race clubhouses are
         $data['description'] = $this->clubhouse_post->get_clubhouse_description();
@@ -30,7 +30,7 @@ class Clubhouses extends LoggedController {
         $data['race'] = $codename;
 
         // get all races to show disabled links to not accessible clubhouses
-        $data['user_races'] = $this->clubhouse_post->get_accessible_races();
+        $data['user_races'] = $this->session->userdata('races');
 
         // get metadata
         $data['metadata'] = $this->clubhouse_post->get_clubhouse_meta($codename);

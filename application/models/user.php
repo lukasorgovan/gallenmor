@@ -70,6 +70,7 @@ class User extends CI_Model {
                         "avatar" => $row->avatar,
                         "banned" => $row->banned,
                         "authority" => $row->authority,
+                        "races" => $this->getUserRaces($row->id),
                         "login_state" => TRUE
                     ));
                     return TRUE;
@@ -156,9 +157,17 @@ class User extends CI_Model {
         $query = $this->db->query($sql, array($user_id));
 
         if ($query->num_rows() > 0) {
-            return $query->result_array();
+            $data = $query->result_array();
+        } else {
+            $data = array();
         }
-        return array();
+
+        /* Note: This method may need more refactoring... */
+        $races = array();
+        foreach ($data as $race) {
+            array_push($races, $race['race']);
+        }
+        return $races;
     }
 
 }
