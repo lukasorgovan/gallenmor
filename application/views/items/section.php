@@ -14,6 +14,7 @@
     }
 
     foreach ($items as $item) {
+        $item['admin'] = $admin;
         $this->load->view('items/_item', $item);
     }
     ?>
