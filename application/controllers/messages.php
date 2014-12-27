@@ -34,7 +34,7 @@ class Messages extends LoggedController {
         $data['curtime'] = time();
 
         // To-Do: Eh, this feature is already in admin-stuff branch under Admin_tools model
-        $data['users'] = $this->user->getAllUsers(true);
+        $data['users'] = $this->user->get_all_users(true);
 
         $this->load->view('messages/new_message', $data);
     }

@@ -52,10 +52,10 @@ class Api extends CI_Controller {
 	 * Checks if user name is availible in system or already taken.
 	 * @return boolean true/false
 	 */
-	public function checkAvailibility($table, $entity) {
+	public function check_availibility($table, $entity) {
 		if ($entity == 'username' || $entity == 'charname' || $entity == 'email') {
 			$data = $this->input->post(NULL, TRUE);
-			$response = $this->User->checkAvailibility($data[$entity],  $table, $entity);
+			$response = $this->User->check_availibility($data[$entity],  $table, $entity);
 		} 
 		else {
 			$response = 1;
@@ -102,7 +102,7 @@ class Api extends CI_Controller {
 
 							case 'username':
 								if (preg_match("/^[a-zľščťžýáíéúäňôö]{2,}[0-9]{0,2}$/i", $value)) {
-									$res = $this->User->checkAvailibility($value, 'users', $key);
+									$res = $this->User->check_availibility($value, 'users', $key);
 									
 
 									if ($res != '0') {
@@ -113,7 +113,7 @@ class Api extends CI_Controller {
 								break;
 							case 'email':
 								if (preg_match("/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/", $value)) {
-									if ($this->User->checkAvailibility($value, 'users', $key) != 0) {
+									if ($this->User->check_availibility($value, 'users', $key) != 0) {
 										$error_messages[] = 'email_taken';	
 									}
 								}
@@ -121,7 +121,7 @@ class Api extends CI_Controller {
 								break;
 							case 'charname':
 								if (preg_match("/^([a-zľščťžýáíéúäňôö']{2,} '?[a-zľščťžýáåäíéúňôö']{2,}( ?'?[a-zľščťžýäáäíéúňôö']{2,})?)$/i", $value)) {
-									if ($this->User->checkAvailibility($value, 'characters', $key) != 0) {
+									if ($this->User->check_availibility($value, 'characters', $key) != 0) {
 										$error_messages[] = 'charname_taken';	
 									}
 								}
@@ -156,7 +156,7 @@ class Api extends CI_Controller {
 						$ip = $this->input->ip_address();
 
 						// If transaction was unsucessfull, add error
-						if (! $this->User->registerUserChar($data, $ip, $salt)) {
+						if (! $this->User->register_user_char($data, $ip, $salt)) {
 							$error_messages[] = 'system_failure';
 							echo json_encode($error_messages);
 						}

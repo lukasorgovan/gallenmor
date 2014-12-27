@@ -232,7 +232,7 @@ function checkField(fieldName, fieldValue, event, $element) {
 				var reg = /^[a-zľščťžýáíéúäňôö]{2,}[0-9]{0,2}$/i,
 				result = reg.test(fieldValue) ? (fieldValue.length <= 20 ? true : 'username') : 'username';
 				if (result === true && event.type == 'focusout') {
-					checkAvailibility('/api/checkAvailibility/users/username', {username: fieldValue}, fieldName);
+					check_availibility('/api/check_availibility/users/username', {username: fieldValue}, fieldName);
 				}
 				break;
 			case 'date':
@@ -250,7 +250,7 @@ function checkField(fieldName, fieldValue, event, $element) {
 				var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 				result = reg.test(fieldValue) ? true : 'email';
 				if (result === true) {
-					checkAvailibility('/api/checkAvailibility/users/email', {email: fieldValue}, fieldName);
+					check_availibility('/api/check_availibility/users/email', {email: fieldValue}, fieldName);
 				}
 				break;
 			case 'race':
@@ -261,7 +261,7 @@ function checkField(fieldName, fieldValue, event, $element) {
 				var reg = /^([a-zľščťžýáíéúäňôö']{2,} '?[a-zľščťžýáåäíéúňôö']{2,}( ?'?[a-zľščťžýäáäíéúňôö']{2,})?)$/i,
 				result = reg.test(fieldValue) ? true : 'charname';
 				if (result === true) {
-					checkAvailibility('/api/checkAvailibility/characters/charname', {charname: fieldValue}, fieldName);
+					check_availibility('/api/check_availibility/characters/charname', {charname: fieldValue}, fieldName);
 				}
 				break;
 			case 'age':
@@ -285,7 +285,7 @@ function checkField(fieldName, fieldValue, event, $element) {
  * @param  {string} fieldName
  * @return {bool}
  */
-function checkAvailibility(requestURI, dataObject, fieldName) {
+function check_availibility(requestURI, dataObject, fieldName) {
 	var request = $.ajax({
 		type: "POST",
 		url: requestURI,
