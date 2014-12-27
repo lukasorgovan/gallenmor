@@ -6,10 +6,12 @@
     </header>
 
     <h1>Oznamy</h1>
-    <h2><?= $section_name ?></h2>
     <?php
-    $this->load->view('wall/_icons');
+    echo anchor('wall/rpg', 'RPG Oznamy ');
+    echo anchor('wall/non_rpg', 'Non-RPG Oznamy ');
+    echo anchor('wall/rl', 'RL Oznamy');
     ?>
+    <br><br>
 
     <?php if ($this->session->flashdata('success')) : ?>
         <div class="successMessage"><?= $this->session->flashdata('success') ?></div>
@@ -33,8 +35,11 @@
                 <input type="text" name="title" placeholder="Titulok" maxlength="255" required><br>
                 <input type="text" name="rpg_author" placeholder="RPG autor (voliteľné - prepíše meno účtu z ktorého to bolo poslané)" maxlength="128"><br>
                 <textarea name="message" cols="50" rows="10" required></textarea>
-                <input type="hidden" name="section" value="<?= $section ?>" />
-                <input type="hidden" name="section_name" value="<?= $this->uri->segment(2); ?>" />
+                <select name="section">
+                    <option value="rpg">RPG</option>
+                    <option value="non">Non-RPG</option>
+                    <option value="rl">RL</option>
+                </select>
                 <input type="submit" value="Odoslať" />
             </form>
 
@@ -44,10 +49,18 @@
         if (count($posts) == 0) {
             echo "<tr><td>V tejto sekcii nie sú žiadne príspevky</td></tr>";
         }
+        $last = "";
         foreach ($posts as $post) {
+            if ($last != $post['section']) {
+                echo "<div id=\"" . $post['section'] . "\">";
+            }
             $post['author'] = (isset($post['rpg_author']) && $post['rpg_author'] != "") ? $post['rpg_author'] : $post['username'];
             $post['section_code'] = $this->uri->segment(2);
             $this->load->view('wall/_post', $post);
+            if ($last != $post['section']) {
+                echo "</div>";
+                $last = $post['section'];
+            }
         }
     }
     ?>
