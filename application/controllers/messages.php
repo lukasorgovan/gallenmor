@@ -4,7 +4,7 @@ class Messages extends LoggedController {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('message');
+        $this->load->model('Message');
     }
 
     /**
@@ -18,7 +18,7 @@ class Messages extends LoggedController {
      * Displays received messages for the user
      */
     public function inbox() {
-        $data['messages'] = $this->message->get_received_messages($this->session->userdata('id'));
+        $data['messages'] = $this->Message->get_received_messages($this->session->userdata('id'));
         $this->load->view('messages/inbox', $data);
     }
 
@@ -26,15 +26,15 @@ class Messages extends LoggedController {
      * Displays incoming messages for the user
      */
     public function create() {
-        $this->load->model('user');
+        $this->load->model('User');
 
         // To-Do: Find out if bird is free
-        $bird_available = $this->message->get_bird_availability();
+        $bird_available = $this->Message->get_bird_availability();
         $data['bird_available'] = $bird_available;
         $data['curtime'] = time();
 
         // To-Do: Eh, this feature is already in admin-stuff branch under Admin_tools model
-        $data['users'] = $this->user->get_all_users(true);
+        $data['users'] = $this->User->get_all_users(true);
 
         $this->load->view('messages/new_message', $data);
     }
@@ -48,11 +48,11 @@ class Messages extends LoggedController {
         $send_type = trim($this->input->post('send_type'));
 
         // test if user has enough parchment etc.
-        if (!$this->message->check_message_supplies()) {
+        if (!$this->Message->check_message_supplies()) {
             
         } else {
             // check if user has enough food or gold to send message
-            if (!$this->message->send_type($send_type)) {
+            if (!$this->Message->send_type($send_type)) {
                 if ($send_type == 'bird') {
                     $this->session->set_flashdata('error', 'Správu sa nepodarilo odoslať, pretože nemáte dostatok krmiva pre vtáka.');
                 } else {
@@ -66,7 +66,7 @@ class Messages extends LoggedController {
                 if ($message == "" || !$message) {
                     $this->session->set_flashdata('error', 'Nevyplnili ste obsah správy.');
                 } else {
-                    if ($this->message->send($this->session->userdata('id'), $to_user, $message, $delivered)) {
+                    if ($this->Message->send($this->session->userdata('id'), $to_user, $message, $delivered)) {
                         $this->session->set_flashdata('success', 'Správa bola odoslaná.');
                     } else {
                         $this->session->set_flashdata('message', $message); // save the message
@@ -90,10 +90,10 @@ class Messages extends LoggedController {
      * @param int $id Id of the conversation
      */
     public function conversation($id) {
-        $info = $this->message->get_conversation_info($id);
+        $info = $this->Message->get_conversation_info($id);
 
         // To-Do: Find out if bird is free
-        $bird_available = $this->message->get_bird_availability();
+        $bird_available = $this->Message->get_bird_availability();
         $data['bird_available'] = $bird_available;
         $data['curtime'] = time();
 
@@ -115,7 +115,7 @@ class Messages extends LoggedController {
                 $data['username'] = $info->u2username;
             }
 
-            $data['messages'] = $this->message->get_messages($info->from_user_id, $info->to_user_id);
+            $data['messages'] = $this->Message->get_messages($info->from_user_id, $info->to_user_id);
         }
 
         $this->load->view('messages/conversation', $data);
