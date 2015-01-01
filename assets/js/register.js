@@ -52,10 +52,13 @@
 	$("input[name='username']").on('focusin', function() {
 		$('.hint').show(400);
 	});
-	$("input[type='range']").on('change', function() {
+	$("input[type='range']").on('input change', function() {
 		$('#age-output').html(this.value);
 	});
-
+	$("#age-output").on('input', function(e) {
+		console.log(this);
+		$("'input[type='range'").val(this.textContent);
+	}
 	/**
 	 * Bind steps buttons, do sanity field check on client side
 	 * @param  {object} event recorded event

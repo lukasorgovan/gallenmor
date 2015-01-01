@@ -64,7 +64,7 @@
                     <input type="text" name="charname" id="charname" class="step-3" placeholder="meno postavy" required="required"/><div id="msg-charname" class="error"></div>
                     <div id="generator">G</div>
                     <label for="age" id="ageLabel" class='step-3'>Vek postavy</label>
-                    <span id="age-output" class="age-output step-3">35</span>
+                    <span id="age-output" class="age-output step-3" contentEditable="true">35</span>
                     <input type="range" name="age" min="20" max="50" class="step-3" value="35"/>
                     <div id="msg-age" class="error"></div>
 
