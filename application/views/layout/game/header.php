@@ -13,7 +13,7 @@
 
         <link rel="icon" type="image/png" href="<?= base_url('favicon.ico') ?>" />
         <link href='http://fonts.googleapis.com/css?family=Metamorphous&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css' />
-        <link href='http://fonts.googleapis.com/css?family=Noticia+Text|Vesper+Libre&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Noticia+Text:400,400italic,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         
         <style>
             <!-- 
