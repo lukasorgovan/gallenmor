@@ -7,6 +7,9 @@
 
     <div class="overlay">
         <?php
+        echo $_SERVER['HTTP_HOST'];
+        echo ENVIRONMENT;
+        echo base_url();
         if (isset($error)) {
             echo $error;
         }

@@ -18,7 +18,7 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-if($_SERVER['HTTP_HOST'] == "localhost") {
+if($_SERVER['HTTP_HOST'] == "localhost:8888" || $_SERVER['HTTP_HOST'] == "localhost") {
 	define('ENVIRONMENT', 'localhost');
 } else {
     define('ENVIRONMENT', 'development');
