@@ -56,9 +56,8 @@
 		$('#age-output').html(this.value);
 	});
 	$("#age-output").on('input', function(e) {
-		console.log(this);
-		$("'input[type='range'").val(this.textContent);
-	}
+		$("input[type='range'").val(this.textContent);
+	});
 	/**
 	 * Bind steps buttons, do sanity field check on client side
 	 * @param  {object} event recorded event
