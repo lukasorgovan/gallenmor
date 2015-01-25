@@ -13,6 +13,7 @@ class Wall extends LoggedController {
     public function index($page = 1) {
         $data['posts'] = $this->Wall_post->get_posts($page);
         $this->load->view('wall/index', $data);
+        $this->output->cache(15);
     }
 
     /**

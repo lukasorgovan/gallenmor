@@ -19,6 +19,7 @@ class Clubhouses extends LoggedController {
         $data['description'] = $this->Clubhouse_post->get_clubhouse_description();
 
         $this->load->view('clubhouses/index', $data);
+        $this->output->cache(1440);
     }
 
     /**
@@ -43,6 +44,7 @@ class Clubhouses extends LoggedController {
         }
 
         $this->load->view('clubhouses/race', $data);
+        $this->output->cache(5);
     }
 
     /**

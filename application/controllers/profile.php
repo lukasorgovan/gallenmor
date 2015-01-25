@@ -11,6 +11,7 @@ class Profile extends LoggedController {
     public function index($id) {
         // To-Do: if id is not set display current characters profile
         echo "Showing character's profile with id $id";
+        $this->output->cache(10);
     }
 
     /**
