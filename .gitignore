@@ -2,5 +2,6 @@
 untitled.sublime-workspace
 /nbproject
 application/config/localhost
+application/cache
 /index.php
 index.php
