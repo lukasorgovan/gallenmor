@@ -13,6 +13,7 @@ class Items extends LoggedController {
     public function index() {
         $data['admin'] = $this->_is_admin();
         $this->load->view('items/index', $data);
+        $this->output->cache(1440);
     }
 
     /**
@@ -49,6 +50,7 @@ class Items extends LoggedController {
             $data['items'] = $this->item->get_items($section);
             $this->load->view('items/section', $data);
         }
+        $this->output->cache(60);
     }
 
     /**
