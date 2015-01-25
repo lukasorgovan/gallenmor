@@ -6,7 +6,7 @@ class Login extends CI_Controller {
         $this->load->view('pages/login');
     }
 
-    public function submitLogin() {
+    public function submit_login() {
         $this->load->model('User');
 
         $login = $this->input->post('login');

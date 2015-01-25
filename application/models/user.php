@@ -10,7 +10,7 @@ class User extends CI_Model {
      * @param type $column
      * @return type number of rows found for the username
      */
-    function checkAvailibility($data, $table, $column) {
+    function check_availibility($data, $table, $column) {
         $sql = "SELECT COUNT(*) AS pocet FROM {$table} WHERE {$column} = ?";
         $query = $this->db->query($sql, array($data));
         foreach ($query->result() as $row) {
@@ -26,7 +26,7 @@ class User extends CI_Model {
      * @param type $salt
      * @return boolean
      */
-    function registerUserChar($data, $ip, $salt) {
+    function register_user_char($data, $ip, $salt) {
         if (is_array($data)) {
             // Perform transaction to register user and his character
             $sql_user = "INSERT INTO users (username, email, password, birthday, regip, salt) VALUES(?, ?, ?, ?, ?, ?)";
@@ -70,6 +70,7 @@ class User extends CI_Model {
                         "avatar" => $row->avatar,
                         "banned" => $row->banned,
                         "authority" => $row->authority,
+                        "races" => $this->get_users_races($row->id),
                         "login_state" => TRUE
                     ));
                     return TRUE;
@@ -88,7 +89,7 @@ class User extends CI_Model {
      * @param type $user_id
      * @return type
      */
-    public function getUserData($user_id) {
+    public function get_user_data($user_id) {
         $sql = "SELECT * FROM users WHERE id = ?";
         $query = $this->db->query($sql, array($user_id));
 
@@ -106,8 +107,8 @@ class User extends CI_Model {
      * @param type $password
      * @param type $salt
      */
-    public function updateAccountSetting($user_id, $email, $password) {
-        $data = $this->getUserData($user_id);
+    public function update_account_settings($user_id, $email, $password) {
+        $data = $this->get_user_data($user_id);
         $salt = $data->salt;
 
         $sql_email = "UPDATE users SET email = ? WHERE id = ?";
@@ -131,7 +132,7 @@ class User extends CI_Model {
      * @param boolean $exclude_yourself Flag to exclude logged user from the list
      * @return type array of all users [id, username]
      */
-    public function getAllUsers($exclude_yourself = false) {
+    public function get_all_users($exclude_yourself = false) {
         if ($exclude_yourself) {
             $sql = "SELECT id, username FROM users WHERE id <> ? ORDER BY username ASC";
             $query = $this->db->query($sql, array($this->session->userdata('id')));
@@ -151,14 +152,22 @@ class User extends CI_Model {
      * 
      * @param int $user_id
      */
-    public function getUserRaces($user_id) {
+    public function get_users_races($user_id) {
         $sql = "SELECT race FROM characters WHERE id_user = ?";
         $query = $this->db->query($sql, array($user_id));
 
         if ($query->num_rows() > 0) {
-            return $query->result_array();
+            $data = $query->result_array();
+        } else {
+            $data = array();
         }
-        return array();
+
+        /* Note: This method may need more refactoring... */
+        $races = array();
+        foreach ($data as $race) {
+            array_push($races, $race['race']);
+        }
+        return $races;
     }
 
 }

@@ -5,7 +5,7 @@
         <?php $this->load->view('layout/game/menu') ?>
     </header>
 
-    <h1>Správa postáv na tvojom účte</h1>
+    <h1>Správa postáv na účte</h1>
     <p>Na svojom účte môžeš mať naraz 5 postáv. Pridávať a odstraňovať si ich môžeš sám kedykoľvek.</p>
 
     <?php if ($this->session->flashdata('success')) : ?>
@@ -15,6 +15,10 @@
     <?php if ($this->session->flashdata('error')) : ?>
         <div class="errorMessage"><?= $this->session->flashdata('error') ?></div>
     <?php endif ?>
+
+    <?php if (!$own_account && !$admin) : ?>
+        <div class="errorMessage">Nemôžeš manipulovať s postavami na inom účte</div>
+    <?php endif ?>   
     <h2>Tvoje postavy</h2>
     <table>
         <?php
@@ -25,8 +29,9 @@
             ?>
             <tr>
                 <td><strong><?= $char['charname']; ?></strong></td>
-                <td><form action="<?= site_url('profile/delCharacter') ?>" method="POST">
+                <td><form action="<?= site_url('profile/del_character') ?>" method="POST">
                         <input type="hidden" name="delete_character" id="delete_character" value="<?= $char['id']; ?>"/>
+                        <input type="hidden" name="account_id" value="<?= $account_id; ?>"/>
                         <input type="submit" value="Zmazať postavu" class="button-delete" onclick="return confirm('Skutočne chceš zmazať túto postavu? Tento krok je nevratný.')"/>
                     </form>
                 </td>
@@ -35,11 +40,11 @@
         ?>
     </table>
     <?php
-    if (count($characters) < 5) {
+    if (count($characters) < 5 || $admin) {
         /* To-Do: include stuff as on registration page */
         ?>
         <h2>Vytvoriť novú postavu</h2>
-        <form action="<?= site_url('profile/addCharacter') ?>" method="POST">
+        <form action="<?= site_url('profile/add_character') ?>" method="POST">
             <input type="hidden" name="race" id="race" class="step-2" value="svetli-elfovia"/>
             <div class="race-pick">
                 <span class="scroller-arrow arrow-left" data-dir="left">&larr;</span>
@@ -66,6 +71,7 @@
             <span id="age-output" class="age-output step-3">35</span>
             <input type="range" name="age" min="20" max="50" value="35"/>
             <div id="msg-age" class="error"></div>
+            <input type="hidden" name="account_id" value="<?= $account_id; ?>"/>
             <input type="submit" value="Vytvoriť postavu" class="button"/>
         </form>
         <?php

@@ -14,7 +14,7 @@
             echo $error;
         }
         ?>
-        <form action="<?= site_url('login/submitLogin')?>" method="post" name="user" id="user">
+        <form action="<?= site_url('login/submit_login')?>" method="post" name="user" id="user">
             <input type="text" name="login" placeholder="Email" required="required"/>
             <input type="password" name="password" placeholder="Heslo" required="required"/>
             <input type="submit"/>

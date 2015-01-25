@@ -42,7 +42,7 @@ class Wall_post extends CI_Model {
      * @return boolean If the post was successfuly updated
      */
     public function update($id, $title, $rpg_author, $message) {
-        
+
         $sql = "UPDATE wall_posts SET title = ?, rpg_author = ?, message = ? WHERE id = ?";
         $this->db->trans_start();
         $this->db->query($sql, array($title, $rpg_author, $message, $id));
@@ -53,19 +53,31 @@ class Wall_post extends CI_Model {
     /**
      * Returns clubhouse posts for specified clubhouse with optional parameters
      * 
-     * @param string $section  Wall section (1 = RPG, 2 = Non-RPG, 3 = RL)
      * @param int $page Number of posts page to be shown
      * @param int $per_page How many posts should be shown per page
      * @return array Array of posts
      */
-    public function get_posts($section, $page = 1, $per_page = 15) {
+    public function get_posts($page = 1, $per_page = 15) {
         $offset = ($page - 1) * $per_page;
-        $sql = "SELECT c.*, u.username FROM wall_posts c
+        $sql = "
+            (SELECT c.*, u.username FROM wall_posts c
             JOIN users u ON c.user_id = u.id
-            WHERE section = ? AND deleted = 0
+            WHERE section='rpg' AND deleted = 0
             ORDER BY created DESC
-            LIMIT ?, ?";
-        $query = $this->db->query($sql, array($section, $offset, $per_page));
+            LIMIT ?, ?)
+            UNION ALL
+            (SELECT c.*, u.username FROM wall_posts c
+            JOIN users u ON c.user_id = u.id
+            WHERE section='non' AND deleted = 0
+            ORDER BY created DESC
+            LIMIT ?, ?)
+            UNION ALL
+            (SELECT c.*, u.username FROM wall_posts c
+            JOIN users u ON c.user_id = u.id
+            WHERE section='rl' AND deleted = 0
+            ORDER BY created DESC
+            LIMIT ?, ?)";
+        $query = $this->db->query($sql, array($offset, $per_page, $offset, $per_page, $offset, $per_page));
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
@@ -97,7 +109,7 @@ class Wall_post extends CI_Model {
         if ($this->session->userdata('authority') == 99) {
             return true;
         }
-        
+
         $post = $this->get_post($id);
         return $post['user_id'] == $this->session->userdata('id');
     }

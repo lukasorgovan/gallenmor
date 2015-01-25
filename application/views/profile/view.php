@@ -23,7 +23,7 @@
         echo '<br/>';
     }
     ?>
-    <?= anchor('profile/editCharacters', 'Spravovať postavy'); ?>
+    <?= anchor('profile/edit_characters', 'Spravovať postavy'); ?>
 </div>
 
 

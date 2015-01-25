@@ -4,7 +4,7 @@ class Clubhouses extends LoggedController {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('clubhouse_post');
+        $this->load->model('Clubhouse_post');
     }
 
     /**
@@ -13,12 +13,13 @@ class Clubhouses extends LoggedController {
      */
     public function index() {
         // get all races to show disabled links to not accessible clubhouses
-        $data['user_races'] = $this->clubhouse_post->get_accessible_races();
+        $data['user_races'] = $this->session->userdata('races');
 
         // get description of what race clubhouses are
-        $data['description'] = $this->clubhouse_post->get_clubhouse_description();
+        $data['description'] = $this->Clubhouse_post->get_clubhouse_description();
 
         $this->load->view('clubhouses/index', $data);
+        $this->output->cache(1440);
     }
 
     /**
@@ -30,19 +31,20 @@ class Clubhouses extends LoggedController {
         $data['race'] = $codename;
 
         // get all races to show disabled links to not accessible clubhouses
-        $data['user_races'] = $this->clubhouse_post->get_accessible_races();
+        $data['user_races'] = $this->session->userdata('races');
 
         // get metadata
-        $data['metadata'] = $this->clubhouse_post->get_clubhouse_meta($codename);
+        $data['metadata'] = $this->Clubhouse_post->get_clubhouse_meta($codename);
 
-        if ($this->clubhouse_post->is_authorized_to_visit($codename)) {
+        if ($this->Clubhouse_post->is_authorized_to_visit($codename)) {
             // get clubhouse posts
-            $data['posts'] = $this->clubhouse_post->get_posts($codename);
+            $data['posts'] = $this->Clubhouse_post->get_posts($codename);
         } else {
             $data['error'] = 'Nemáš postavu s danou rasou a preto nemôžem navštíviť túto klubovňu.';
         }
 
         $this->load->view('clubhouses/race', $data);
+        $this->output->cache(5);
     }
 
     /**
@@ -55,7 +57,7 @@ class Clubhouses extends LoggedController {
         if (!$message || $message == '') {
             $this->session->set_flashdata('error', 'Nezadal si obsah správy.');
         } else {
-            if ($this->clubhouse_post->create($message, $codename)) {
+            if ($this->Clubhouse_post->create($message, $codename)) {
                 $this->session->set_flashdata('success', 'Príspevok bol pridaný.');
             } else {
                 $this->session->set_flashdata('error', 'Príspevok sa nepodarilo pridať. Skúste to neskôr.');
@@ -72,12 +74,12 @@ class Clubhouses extends LoggedController {
         $id = trim($this->input->post('id'));
         $codename = trim($this->input->post('codename'));
 
-        if (!$this->clubhouse_post->is_authorized_to_manage($id)) {
+        if (!$this->Clubhouse_post->is_authorized_to_manage($id)) {
             $this->session->set_flashdata('error', 'Nemáš oprávnenie mazať tento príspevok.');
         } else if (!$id || $id == '') {
             $this->session->set_flashdata('error', 'Id príspevku nebolo zadané.');
         } else {
-            if ($this->clubhouse_post->delete($id)) {
+            if ($this->Clubhouse_post->delete($id)) {
                 $this->session->set_flashdata('success', 'Príspevok bol zmazaný.');
             } else {
                 $this->session->set_flashdata('error', 'Príspevok sa nepodarilo zmazať. Skúste to neskôr.');
@@ -95,12 +97,12 @@ class Clubhouses extends LoggedController {
         $id = trim($this->input->post('id'));
         $codename = trim($this->input->post('codename'));
 
-        if (!$this->clubhouse_post->is_authorized_to_manage($id)) {
+        if (!$this->Clubhouse_post->is_authorized_to_manage($id)) {
             $this->session->set_flashdata('error', 'Nemáš oprávnenie upravovať tento príspevok.');
         } else if (!$message || $message == '') {
             $this->session->set_flashdata('error', 'Nezadal si obsah správy.');
         } else {
-            if ($this->clubhouse_post->update($id, $message)) {
+            if ($this->Clubhouse_post->update($id, $message)) {
                 $this->session->set_flashdata('success', 'Príspevok bol aktualizovaný.');
             } else {
                 $this->session->set_flashdata('error', 'Príspevok sa nepodarilo aktualizovať. Skúste to neskôr.');
@@ -116,10 +118,10 @@ class Clubhouses extends LoggedController {
      * @param int $id Id of the post to be edited
      */
     public function edit($id) {
-        if (!$this->clubhouse_post->is_authorized_to_manage($id)) {
+        if (!$this->Clubhouse_post->is_authorized_to_manage($id)) {
             $data['error'] = 'Nemáš oprávnenie upravovať tento príspevok.';
         } else {
-            $data['post'] = $this->clubhouse_post->get_post($id);
+            $data['post'] = $this->Clubhouse_post->get_post($id);
         }
         $this->load->view('clubhouses/edit', $data);
     }
